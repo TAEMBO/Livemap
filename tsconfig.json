@@ -1,0 +1,18 @@
+{
+  "transpileOnly": true,
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "target": "ESNext",
+    "module": "NodeNext",
+    "baseUrl": "./",
+    "moduleResolution": "nodenext",
+    "typeRoots": [ "node_modules/@types", "./typings" ],
+    "outDir": "dist"
+  },
+"include": [ "node_modules/@types", "./server", "src/libraries", "src/model", "src/routes", "src/api.ts", "src/app.ts", "src/index.ts" ],
+"exclude": [ "node_modules", ".git" ]
+}

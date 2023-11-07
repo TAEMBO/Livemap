@@ -1,0 +1,43 @@
+mixin navigation
+  nav.navbar.fixed-top.navbar-expand-lg.navbar-dark
+    .container
+      a.navbar-brand(href=currentPage)
+        img.d-inline-block.align-center(src="/images/TAEMBO_Favicon.png", height='40', title='Go touch grass now!')
+        span.d-inline-block.ms-2 #{(server.name === '' ? 'Server Offline' : server.name.replace('! ! IRTGaming | ', ''))}
+      ul.navbar.nav
+        li.nav-item
+          a.button(href='/')=('Home')
+        li.nav-item
+          a.button(href='/cs')=('Corn Silage')
+        li.nav-item
+          a.button(href='/gs')=('Grass Silage')
+        li.nav-item
+          a.button(type='button', onclick='toggleDarkMode()') Toggle theme
+
+mixin scripts()
+  script(type='text/javascript').
+
+  // Bootstrap core JavaScript
+  script(src='https://unpkg.com/jquery@3.7.0/dist/jquery.min.js', integrity='sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==', crossorigin='anonymous')
+
+  // Bootstrap
+  script(src='https://unpkg.com/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js', integrity='sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4', crossorigin='anonymous')
+
+  // Custom Scripts
+  script(src='https://unpkg.com/leaflet@1.9.4/dist/leaflet.js' integrity='sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=' crossorigin='')
+  script(src='/javascripts/script.js')
+
+mixin footer()
+  footer.footer.mt-auto.py-3
+    .container
+      span.text-muted
+        | TAEMBO © 2023 - Rebuilt and converted on top of Oasis
+      span.text-muted.float-end
+        | TAEMBO #{version} - Farming Simulator Livemap
+
+mixin newServerError()
+  if isNewServer
+    .row.justify-content-center.new-server-error
+      .col-xl-12
+        .card.bg-warn.mb-3.small.shadow-sm
+          .card-header.text-center="Either the autosave has ran or the server doesn't have a savegame."
