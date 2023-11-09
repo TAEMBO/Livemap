@@ -1,5 +1,4 @@
 import express from 'express';
-import logger from './libraries/logger';
 import { version } from './libraries/version';
 import engines from 'consolidate';
 import path from 'node:path';
@@ -62,7 +61,7 @@ export default class App {
                     error: err
                 });
             })
-            .listen(this.config.port, () => logger.info('TAEMBO ' + version + ` launched on port ${this.config.port}`, ));
+            .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
     }
 
     async fetchJSONStats() {

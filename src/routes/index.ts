@@ -1,5 +1,4 @@
 import express from 'express';
-import logger from '../libraries/logger';
 import App from '../app.js';
 
 export default class IndexRouter {
@@ -13,8 +12,9 @@ export default class IndexRouter {
             .get('*', (req, res, next) => {
                 next();
                 
-                const ip = req.header('x-forwarded-for') || req.socket.remoteAddress.replace('::ffff:', '')
-                if (!req.originalUrl.includes('api')) logger.info(ip + ' :: ' + req.originalUrl);
+                const ip = req.header('x-forwarded-for') || req.socket.remoteAddress.replace('::ffff:', '');
+
+                if (!req.originalUrl.includes('api')) console.log(`[${(new Date()).toLocaleString("en-GB")}] ${ip} - ${req.originalUrl}`);
             })
             .get('/', async (req, res, next) => {
                 this._server = await this._app.fetchEntities();
@@ -29,7 +29,6 @@ export default class IndexRouter {
             });
         
         for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (req, res, next) => {
-
             this._app.chosenServer = key;
             this._server = await this._app.fetchEntities();
             this._savegame = await this._app.fetchCSG();
