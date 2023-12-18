@@ -11,11 +11,11 @@ body{
 }
 
 a {
-  color: #afe0f3;
+  color: #06860a;
   text-decoration: none;
 }
 a:hover {
-  color: #1decaf;
+  color: #0f6b06;
   text-decoration: none;
 }
 
@@ -33,7 +33,6 @@ a:hover {
 }
 
 .card.bg-info > .card-header {
-  background-color: #3eaae4;
   color:#000;
   font-size: 15px;
   font-weight: normal;
@@ -52,7 +51,7 @@ a:hover {
 }
 
 .card-footer {
-  background-color: #4023fc;
+  background-color: #06860a;
   color: white;
   font-weight: bold;
 }

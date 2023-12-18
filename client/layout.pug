@@ -1,8 +1,8 @@
 mixin navigation
   nav.navbar.fixed-top.navbar-expand-lg.navbar-dark
     .container
-      a.navbar-brand(href=currentPage)
-        img.d-inline-block.align-center(src="/images/TAEMBO_Favicon.png", height='40', title='Go touch grass now!')
+      a.navbar-brand()
+        img.d-inline-block.align-center(src="/images/favicon.png", height='40')
         span.d-inline-block.ms-2 #{(server.name === '' ? 'Server Offline' : server.name.replace('! ! IRTGaming | ', ''))}
       ul.navbar.nav
         li.nav-item
@@ -31,13 +31,15 @@ mixin footer()
   footer.footer.mt-auto.py-3
     .container
       span.text-muted
-        | TAEMBO © 2023 - Rebuilt and converted on top of Oasis
+        a(href='//taembo.net') TAEMBO 
+        span
+            | © 2023 - Rebuilt and converted on top of Oasis
       span.text-muted.float-end
-        | TAEMBO #{version} - Farming Simulator Livemap
+        | Farming Simulator Livemap
 
 mixin newServerError()
   if isNewServer
     .row.justify-content-center.new-server-error
       .col-xl-12
         .card.bg-warn.mb-3.small.shadow-sm
-          .card-header.text-center="Either the autosave has ran or the server doesn't have a savegame."
+          .card-header.text-center="The chosen server either has no savegame selected, or the autosave interval ran at the time of this page loading"

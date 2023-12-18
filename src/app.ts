@@ -21,7 +21,7 @@ export default class App {
     readonly serverKeys = Object.keys(this.config.servers);
     readonly indexRouter = new IndexRouter(this);
     readonly apiRouter = new APIRouter(this);
-    readonly userAgentString = "TAEMBO 1.0.69.420/";
+    readonly userAgentString = "Livemap /";
     cachedEntities = {} as Awaited<ReturnType<typeof this.fetchEntities>>;
     chosenServer = "gs";
 
@@ -35,9 +35,6 @@ export default class App {
             .use(express.static(path.join(__dirname, '../public')))
             .use(cookieParser())
             .use((req, res, next) => {
-                res.locals.currentPage = req.url;
-                res.locals.config = this.config;
-                res.locals.version = version;
                 res.locals.icons = icons;
 
                 next();

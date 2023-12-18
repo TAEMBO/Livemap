@@ -1,9 +1,3 @@
-export interface Config {
-    port: number;
-    map: {
-    };
-}
-
 export interface ServerTyping {
     name: string;
     version: string;
@@ -13,6 +7,7 @@ export interface SlotsTyping {
     used: number;
     capacity: number;
 }
+
 export interface FSCSG {
     readonly careerSavegame: {
         readonly settings?: {
@@ -73,10 +68,3 @@ export interface FSCSG {
         };
     }
 }
-  
-  interface XMLTypings {
-    _text:number|string|boolean
-    _attributes:{
-      [key:string]:number|string|boolean
-    }
-  }

@@ -9,11 +9,13 @@ function queryAllSet(card, listgroup, listgroupitem) {
     const listgroupQuery = document.querySelectorAll(listgroup);
     const listgroupitemQuery = document.querySelectorAll(listgroupitem);
     
-    cardQuery.forEach(x => x.style.setProperty('background-color', '#090909'));
-    listgroupQuery.forEach(x => x.style.setProperty('--bs-list-group-color', '#fff'));
-    listgroupQuery.forEach(x => x.style.setProperty('--bs-list-group-bg', '#171717'));
-    listgroupQuery.forEach(x => x.style.setProperty('--bs-list-group-border-color', 'rgba(255, 255, 255, 0.13)'));
-    listgroupitemQuery.forEach(x => x.style.setProperty('color', '#afe0f3'));
+    for (const x of cardQuery) x.style.setProperty('background-color', '#090909');
+    for (const x of listgroupitemQuery) x.style.setProperty('color', '#06860a');
+    for (const x of listgroupQuery) {
+        x.style.setProperty("--bs-list-group-color", "#fff");
+        x.style.setProperty("--bs-list-group-bg", "#171717");
+        x.style.setProperty("--bs-list-group-border-color", "rgba(255, 255, 255, 0.13)");
+    }
 }
 
 function queryAllRemove(card, listgroup, listgroupitem) {
@@ -21,11 +23,13 @@ function queryAllRemove(card, listgroup, listgroupitem) {
     const listgroupQuery = document.querySelectorAll(listgroup);
     const listgroupitemQuery = document.querySelectorAll(listgroupitem);
 
-    cardQuery.forEach(x => x.style.removeProperty('background-color'));
-    listgroupQuery.forEach(x => x.style.removeProperty('--bs-list-group-color'));
-    listgroupQuery.forEach(x => x.style.removeProperty('--bs-list-group-bg'));
-    listgroupQuery.forEach(x => x.style.removeProperty('--bs-list-group-border-color'));
-    listgroupitemQuery.forEach(x => x.style.setProperty('color', '#000'));
+    for (const x of cardQuery) x.style.removeProperty('background-color');
+    for (const x of listgroupitemQuery) x.style.setProperty('color', '#000');
+    for (const x of listgroupQuery) {
+        x.style.removeProperty("--bs-list-group-color");
+        x.style.removeProperty("--bs-list-group-bg");
+        x.style.removeProperty("--bs-list-group-border-color");
+    }
 }
 
 
