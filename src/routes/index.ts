@@ -2,10 +2,11 @@ import express from 'express';
 import App from '../app.js';
 import Game from '../model/game.js';
 import { xml2js } from 'xml-js';
-import { FSCSG } from '../typings.js';
+import { FSCSG, FSDSS } from '../typings.js';
 import player from '../model/player';
 import vehicle from '../model/vehicle';
 import { Server, Slots } from '../model/server.js';
+import { formatTime } from '../libraries/utility.js';
 
 export default class IndexRouter {
     public readonly router = express.Router();
@@ -25,11 +26,11 @@ export default class IndexRouter {
             const serverObj = this._app.config.servers[key];
 
             const server = await (async () => {
-                const stats = await (await fetch(`http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`, { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } })).json();
+                const stats: FSDSS = await (await fetch(`http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`, { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } })).json();
                 const results = {
-                    server: new Server(stats.server),
-                    slots: new Slots(stats.slots),
-                    players: player.getPlayers(stats.slots.players),
+                    server: stats.server,
+                    slots: stats.slots,
+                    players: stats.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) })),
                     vehicles: vehicle.getVehicles(stats.vehicles, stats.server.mapSize)
                 };
         

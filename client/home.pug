@@ -5,12 +5,12 @@ block content
     .col-xl-2
       .card.mb-3.small.shadow-sm
         .card-header=("Player Slots")
-          | &nbsp;(#{slots.onlineCount}/#{slots.maxCount})
+          | &nbsp;(#{slots.used}/#{slots.capacity})
         ul.list-group.list-group-flush
           if players.length>0
             each player in players
               li.list-group-item=player.name
-                if player.admin===true
+                if player.isAdmin
                   span.top-0.ms-1.badge.square-pill.bg-info
                     | Admin
                 span.float-end=player.uptime
