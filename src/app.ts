@@ -1,19 +1,11 @@
 import express from 'express';
-import { version } from './libraries/version';
 import engines from 'consolidate';
 import path from 'node:path';
-import { icons } from './libraries/iconList';
 import cookieParser from 'cookie-parser';
 import IndexRouter from './routes/index.js';
 import APIRouter from './routes/api';
 import config from './config.json';
 import createError from 'http-errors';
-import { Server, Slots } from './model/server';
-import Game from './model/game';
-import player from './model/player';
-import vehicle from './model/vehicle';
-import { FSCSG } from './typings.js';
-import { xml2js } from 'xml-js';
 
 export default class App {
     readonly server = express();
