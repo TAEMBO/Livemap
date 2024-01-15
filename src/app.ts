@@ -51,29 +51,18 @@ export default class App {
             .use(async (err, req, res, next) => {
                 console.log(err.statusCode);
                 res.status(err.statusCode);
-                const server = await this.fetchServerOnly();
 
                 res.render('error', {
-                    server: server,
+                    server: { name: "Error" },
                     error: err
                 });
             })
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
     }
 
-    async fetchJSONStats() {
-        const server = this.config.servers[this.chosenServer];
-    
-        return fetch(`http://${server.ip}/feed/dedicated-server-stats.json?code=${server.code}`, { headers: { 'User-Agent': `${this.userAgentString}DSS` } });
-    }
-
-    async fetchServerOnly() {
-        return new Server((await (await this.fetchJSONStats()).json()).server);
-    }
-    
     async fetchEntities() {
-        const stats = await (await this.fetchJSONStats()).json();
-    
+        const server = this.config.servers[this.chosenServer];
+        const stats = await (await fetch(`http://${server.ip}/feed/dedicated-server-stats.json?code=${server.code}`, { headers: { 'User-Agent': `${this.userAgentString}DSS` } })).json();
         const results = {
             server: new Server(stats.server),
             slots: new Slots(stats.slots),
