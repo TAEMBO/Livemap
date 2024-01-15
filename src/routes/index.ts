@@ -5,7 +5,6 @@ import { xml2js } from 'xml-js';
 import { FSCSG, FSDSS } from '../typings.js';
 import player from '../model/player';
 import vehicle from '../model/vehicle';
-import { Server, Slots } from '../model/server.js';
 import { formatTime } from '../libraries/utility.js';
 
 export default class IndexRouter {
