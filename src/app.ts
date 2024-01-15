@@ -49,6 +49,7 @@ export default class App {
 
                 res.render('error', {
                     server: { name: "Error" },
+                    year: new Date().getFullYear(),
                     error: err
                 });
             })
