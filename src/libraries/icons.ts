@@ -1,4 +1,4 @@
-import utility from './utility.js';
+import * as utility from './utility.js';
 import { icons } from './iconList.js';
 
 interface FillData {

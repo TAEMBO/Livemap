@@ -1,5 +1,5 @@
 import lodash from 'lodash';
-import utility from '../libraries/utility';
+import * as utility from '../libraries/utility';
 import {getIcon, getIconPopup} from '../libraries/icons';
 
 var mapSize:number;

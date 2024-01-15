@@ -1,5 +1,5 @@
 import { FSCSG } from '../typings.js';
-import utility from '../libraries/utility';
+import * as utility from '../libraries/utility';
 
 export default function Game(game: FSCSG) {
     this.isNewServer = game.careerSavegame === undefined ? true : false

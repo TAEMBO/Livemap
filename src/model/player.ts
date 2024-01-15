@@ -1,5 +1,5 @@
 import lodash from 'lodash';
-import utility from '../libraries/utility';
+import * as utility from '../libraries/utility';
 
 function getPlayers(players) {
     const results = [];

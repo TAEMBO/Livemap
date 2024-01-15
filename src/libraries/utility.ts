@@ -41,5 +41,3 @@ export function formatNumber(number: number, digits: number, icon: string) {
   var n = number;
   return n.toLocaleString(undefined, { minimumFractionDigits: digits }) + icon;
 }
-
-export default { c2json, filterFloat, calcCoords, formatTime, formatNumber };
