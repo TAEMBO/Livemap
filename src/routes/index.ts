@@ -33,7 +33,7 @@ export default class IndexRouter {
                     vehicles: vehicle.getVehicles(stats.vehicles, stats.server.mapSize)
                 };
         
-                this._app.cachedEntities = results;
+                this._app.cachedVehicles = results.vehicles;
         
                 return results;
             })();

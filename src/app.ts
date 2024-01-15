@@ -14,7 +14,7 @@ export default class App {
     readonly indexRouter = new IndexRouter(this);
     readonly apiRouter = new APIRouter(this);
     readonly userAgentString = "Livemap /";
-    cachedEntities = {} as { server: any; slots: any; players: any[]; vehicles: any[]; };
+    cachedVehicles = [];
     chosenServer = "gs";
 
     constructor() {

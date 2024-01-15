@@ -8,7 +8,7 @@ export default class APIRouter {
         this.router.get('/geo.json', async (req, res) => {
             const geos = [];
                 
-            for (const obj of this._app.cachedEntities.vehicles) {
+            for (const obj of this._app.cachedVehicles) {
                 if (obj.posx !== null) geos.push({
                     type: 'Feature',
                     geometry: {
