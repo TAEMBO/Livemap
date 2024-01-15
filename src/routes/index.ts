@@ -3,9 +3,8 @@ import App from '../app.js';
 import Game from '../model/game.js';
 import { xml2js } from 'xml-js';
 import { FSCSG, FSDSS } from '../typings.js';
-import player from '../model/player';
-import vehicle from '../model/vehicle';
-import { formatTime } from '../libraries/utility.js';
+import { calcCoords, formatTime } from '../libraries/utility.js';
+import { getIcon, getIconPopup } from '../libraries/icons.js';
 
 export default class IndexRouter {
     public readonly router = express.Router();
@@ -30,10 +29,18 @@ export default class IndexRouter {
                     server: stats.server,
                     slots: stats.slots,
                     players: stats.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) })),
-                    vehicles: vehicle.getVehicles(stats.vehicles, stats.server.mapSize)
                 };
         
-                this._app.cachedVehicles = results.vehicles;
+                this._app.cachedVehicles = stats.vehicles.map(vehicle => ({
+                    name: vehicle.name,
+                    posx: (vehicle.x / (stats.server.mapSize / 2)) * 375,
+                    posy: ((vehicle.z / (stats.server.mapSize / 2)) * 375) * -1,
+                    type: vehicle.type,
+                    category: vehicle.category,
+                    controller: vehicle.controller,
+                    icon: getIcon(vehicle),
+                    popup: getIconPopup(vehicle)
+                }));
         
                 return results;
             })();
@@ -43,9 +50,7 @@ export default class IndexRouter {
             
                 return new Game(xml2js(await result.text(), { compact: true }) as FSCSG);
             })();
-        
-
-    
+            
             res.render('home.pug', {
                 game: savegame,
                 isNewServer: savegame.isNewServer,

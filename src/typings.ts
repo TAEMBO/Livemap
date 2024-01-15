@@ -115,6 +115,7 @@ interface FSDSSVehicle {
         readonly type: string;
         readonly level: number;
     }[];
+    readonly controller?: string;
 }
 
 interface FSDSSMod {
