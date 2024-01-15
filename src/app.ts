@@ -34,11 +34,6 @@ export default class App {
             .use(express.urlencoded({ extended: false }))
             .use(express.static(path.join(__dirname, '../public')))
             .use(cookieParser())
-            .use((req, res, next) => {
-                res.locals.icons = icons;
-
-                next();
-            })
             .use('/', this.indexRouter.router)
             .use('/api', this.apiRouter.router)
             .use((req, res, next) => {
