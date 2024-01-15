@@ -3,7 +3,7 @@ mixin navigation
     .container
       a.navbar-brand()
         img.d-inline-block.align-center(src="/images/favicon.png", height='40')
-        span.d-inline-block.ms-2 #{(server.name === '' ? 'Server Offline' : server.name.replace('! ! IRTGaming | ', ''))}
+        span.d-inline-block.ms-2 #{(dss.server.name === '' ? 'Server Offline' : dss.server.name.replace('! ! IRTGaming | ', ''))}
       ul.navbar.nav
         li.nav-item
           a.button(href='/')=('Home')

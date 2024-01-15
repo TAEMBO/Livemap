@@ -3,7 +3,7 @@ include layout
 doctype html
 html(lang="en").h-100
   head
-    title=(server.name === '' ? 'Server Offline' : server.name.replace('! ! IRTGaming | ',''))
+    title=(dss.server.name === '' ? 'Server Offline' : dss.server.name.replace('! ! IRTGaming | ',''))
     meta(charset="utf-8")
     meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     meta(name="description", content="IRT Livemap")

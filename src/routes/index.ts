@@ -11,26 +11,24 @@ export default class IndexRouter {
 
     constructor(private readonly _app: App) {
         this.router
-            .get('*', (req, res, next) => {
+            .get('*', (req, _, next) => {
                 const ip = req.header('x-forwarded-for') || req.socket.remoteAddress.replace('::ffff:', '');
 
                 if (!req.originalUrl.includes('api')) console.log(`[${(new Date()).toLocaleString("en-GB")}] ${ip} - ${req.originalUrl}`);
 
                 next();
             })
-            .get('/', (req, res) => res.render('serverlist.pug', { server: { name: "Home" }, year: new Date().getFullYear() }));
+            .get('/', (_, res) => res.render('serverlist.pug', {
+                dss: { server: { name: "Home" } },
+                year: new Date().getFullYear()
+            }));
         
-        for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (req, res) => {
+        for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (_, res) => {
             const serverObj = this._app.config.servers[key];
 
             const server = await (async () => {
                 const stats: FSDSS = await (await fetch(`http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`, { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } })).json();
-                const results = {
-                    server: stats.server,
-                    slots: stats.slots,
-                    players: stats.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) })),
-                };
-        
+
                 this._app.cachedVehicles = stats.vehicles.map(vehicle => ({
                     name: vehicle.name,
                     posx: (vehicle.x / (stats.server.mapSize / 2)) * 375,
@@ -42,7 +40,11 @@ export default class IndexRouter {
                     popup: getIconPopup(vehicle)
                 }));
         
-                return results;
+                return {
+                    server: stats.server,
+                    slots: stats.slots,
+                    players: stats.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) })),
+                };
             })();
 
             const savegame = await (async () => {
@@ -50,13 +52,11 @@ export default class IndexRouter {
             
                 return new Game(xml2js(await result.text(), { compact: true }) as FSCSG);
             })();
-            
+
             res.render('home.pug', {
-                game: savegame,
+                dss: server,
+                csg: savegame,
                 isNewServer: savegame.isNewServer,
-                players: server.players,
-                slots: server.slots,
-                server: server.server,
                 year: new Date().getFullYear()
             });
         });

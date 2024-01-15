@@ -34,16 +34,11 @@ export default class App {
                   next(createError(res.status(503)));
                 }
             })
-            .use(async (err, req, res, next) => {
-                console.log(err.statusCode);
-                res.status(err.statusCode);
-
-                res.render('error', {
-                    server: { name: "Error" },
-                    year: new Date().getFullYear(),
-                    error: err
-                });
-            })
+            .use((err, _, res, __) => res.status(500).render('error', {
+                dss: { server: { name: "Error" } },
+                year: new Date().getFullYear(),
+                error: err
+            }))
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
     }
 }

@@ -5,10 +5,10 @@ block content
     .col-xl-2
       .card.mb-3.small.shadow-sm
         .card-header=("Player Slots")
-          | &nbsp;(#{slots.used}/#{slots.capacity})
+          | &nbsp;(#{dss.slots.used}/#{dss.slots.capacity})
         ul.list-group.list-group-flush
-          if players.length>0
-            each player in players
+          if dss.players.length > 0
+            each player in dss.players
               li.list-group-item=player.name
                 if player.isAdmin
                   span.top-0.ms-1.badge.square-pill.bg-info
@@ -17,7 +17,7 @@ block content
           else
             li.list-group-item=("No players online")
         .card-footer=("Money") + ":"
-          span.float-end #{game.money}
+          span.float-end #{csg.money}
     .col-xl-auto
       #map
     .col-xl-2
@@ -26,135 +26,135 @@ block content
         ul.list-group.list-group-flush
           li.list-group-item
             b=("Console Slots")
-            span.float-end #{game.slotUsage}
+            span.float-end #{csg.slotUsage}
           li.list-group-item
             b=("Savegame Name")
-            span.float-end #{game.savegameName}
+            span.float-end #{csg.savegameName}
           li.list-group-item
             b=("Creation Date")
-            span.float-end #{game.creationDate}
+            span.float-end #{csg.creationDate}
           li.list-group-item
             b=("Map")
-            span.float-end #{game.mapTitle}
+            span.float-end #{csg.mapTitle}
           li.list-group-item
             b=("Server Version")
-            span.float-end #{server.version}
+            span.float-end #{dss.server.version}
           li.list-group-item
             b=("Timescale")
-            span.float-end #{game.timeScale}
+            span.float-end #{csg.timeScale}
           li.list-group-item
             b=("Autosave Interval")
-            span.float-end #{game.saveInterval}
+            span.float-end #{csg.saveInterval}
           li.list-group-item
             b=("Economy Difficulty")
-            if game.economicDifficulty=="1"
+            if csg.economicDifficulty=="1"
               span.float-end Easy
-            if game.economicDifficulty=="2"
+            if csg.economicDifficulty=="2"
               span.float-end Normal
-            if game.economicDifficulty=="3"
+            if csg.economicDifficulty=="3"
               span.float-end Hard
           li.list-group-item
             b=("Fixed Visual Month")
-            if game.fixedSeasonalVisuals=="nil"
+            if csg.fixedSeasonalVisuals=="nil"
               span.float-end Off
-            if game.fixedSeasonalVisuals=="1"
+            if csg.fixedSeasonalVisuals=="1"
               span.float-end March
-            if game.fixedSeasonalVisuals=="2"
+            if csg.fixedSeasonalVisuals=="2"
               span.float-end April
-            if game.fixedSeasonalVisuals=="3"
+            if csg.fixedSeasonalVisuals=="3"
               span.float-end May
-            if game.fixedSeasonalVisuals=="4"
+            if csg.fixedSeasonalVisuals=="4"
               span.float-end June
-            if game.fixedSeasonalVisuals=="5"
+            if csg.fixedSeasonalVisuals=="5"
               span.float-end July
-            if game.fixedSeasonalVisuals=="6"
+            if csg.fixedSeasonalVisuals=="6"
               span.float-end August
-            if game.fixedSeasonalVisuals=="7"
+            if csg.fixedSeasonalVisuals=="7"
               span.float-end September
-            if game.fixedSeasonalVisuals=="8"
+            if csg.fixedSeasonalVisuals=="8"
               span.float-end October
-            if game.fixedSeasonalVisuals=="9"
+            if csg.fixedSeasonalVisuals=="9"
               span.float-end November
-            if game.fixedSeasonalVisuals=="10"
+            if csg.fixedSeasonalVisuals=="10"
               span.float-end December
-            if game.fixedSeasonalVisuals=="11"
+            if csg.fixedSeasonalVisuals=="11"
               span.float-end January
-            if game.fixedSeasonalVisuals=="12"
+            if csg.fixedSeasonalVisuals=="12"
               span.float-end February
           li.list-group-item
             b=("Growth Mode")
-            if game.growthMode=="1"
+            if csg.growthMode=="1"
               span.float-end Yes
-            if game.growthMode=="2"
+            if csg.growthMode=="2"
               span.float-end No
-            if game.growthMode=="3"
+            if csg.growthMode=="3"
               span.float-end Crops paused
           li.list-group-item
             b=("Fuel Usage")
-            if game.fuelUsage=="1"
+            if csg.fuelUsage=="1"
               span.float-end Low
-            if game.fuelUsage=="2"
+            if csg.fuelUsage=="2"
               span.float-end Normal
-            if game.fuelUsage=="3"
+            if csg.fuelUsage=="3"
               span.float-end High
           li.list-group-item
             b=("Dirt Setting")
-            if game.dirtInterval=="1"
+            if csg.dirtInterval=="1"
               span.float-end Off
-            if game.dirtInterval=="2"
+            if csg.dirtInterval=="2"
               span.float-end Slow
-            if game.dirtInterval=="3"
+            if csg.dirtInterval=="3"
               span.float-end Normal
-            if game.dirtInterval=="4"
+            if csg.dirtInterval=="4"
               span.float-end Fast
           li.list-group-item
             b=("Plowing Required")
-            if game.plowingRequiredEnabled=="false"
+            if csg.plowingRequiredEnabled=="false"
               span.float-end Off
-            if game.plowingRequiredEnabled=="true"
+            if csg.plowingRequiredEnabled=="true"
               span.float-end On
           li.list-group-item
             b=("Automatic Motor Start")
-            if game.automaticMotorStartEnabled=="false"
+            if csg.automaticMotorStartEnabled=="false"
               span.float-end Off
-            if game.automaticMotorStartEnabled=="true"
+            if csg.automaticMotorStartEnabled=="true"
               span.float-end On
           li.list-group-item
             b=("Crop Destruction")
-            if game.fruitDestruction=="false"
+            if csg.fruitDestruction=="false"
               span.float-end Off
-            if game.fruitDestruction=="true"
+            if csg.fruitDestruction=="true"
               span.float-end On
       .card.mb-3.small.shadow-sm
         .card-header=("Helper Settings")
         ul.list-group.list-group-flush
           li.list-group-item
             b=("Buy Fuel")
-            if game.helperBuyFuel=="true"
+            if csg.helperBuyFuel=="true"
               span.float-end Buy
-            if game.helperBuyFuel=="false"
+            if csg.helperBuyFuel=="false"
               span.float-end Off
           li.list-group-item
             b=("Buy Seeds")
-            if game.helperBuySeeds=="true"
+            if csg.helperBuySeeds=="true"
               span.float-end Buy
-            if game.helperBuySeeds=="false"
+            if csg.helperBuySeeds=="false"
               span.float-end Off
           li.list-group-item
             b=("Buy Fertilizer")
-            if game.helperBuyFertilizer=="true"
+            if csg.helperBuyFertilizer=="true"
               span.float-end Buy
-            if game.helperBuyFertilizer=="false"
+            if csg.helperBuyFertilizer=="false"
               span.float-end Off
           li.list-group-item
             b=("Slurry Source")
-            if game.helperSlurrySource=="1"
+            if csg.helperSlurrySource=="1"
               span.float-end Off
-            if game.helperSlurrySource=="2"
+            if csg.helperSlurrySource=="2"
               span.float-end Buy
           li.list-group-item
             b=("Manure Source")
-            if game.helperManureSource=="1"
+            if csg.helperManureSource=="1"
               span.float-end Off
-            if game.helperManureSource=="2"
+            if csg.helperManureSource=="2"
               span.float-end Buy
