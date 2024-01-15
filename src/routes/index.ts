@@ -3,11 +3,8 @@ import App from '../app.js';
 
 export default class IndexRouter {
     public readonly router = express.Router();
-    private _server: any = null;
-    private _savegame: any = null;
 
     constructor(private readonly _app: App) {
-
         this.router
             .get('*', (req, res, next) => {
                 const ip = req.header('x-forwarded-for') || req.socket.remoteAddress.replace('::ffff:', '');
@@ -16,19 +13,20 @@ export default class IndexRouter {
 
                 next();
             })
-            .get('/', async (req, res) => res.render('serverlist.pug', { server: { name: "Home" } }));
+            .get('/', (req, res) => res.render('serverlist.pug', { server: { name: "Home" }, year: new Date().getFullYear() }));
         
-        for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (req, res, next) => {
+        for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (req, res) => {
             this._app.chosenServer = key;
-            this._server = await this._app.fetchEntities();
-            this._savegame = await this._app.fetchCSG();
+            const server = await this._app.fetchEntities();
+            const savegame = await this._app.fetchCSG();
         
             res.render('home.pug', {
-                game: this._savegame,
-                slots: this._server.slots,
-                server: this._server.server,
-                players: this._server.players,
-                isNewServer: this._savegame.isNewServer,
+                game: savegame,
+                isNewServer: savegame.isNewServer,
+                players: server.players,
+                slots: server.slots,
+                server: server.server,
+                year: new Date().getFullYear()
             });
         });
     }
