@@ -22,7 +22,7 @@ export default class App {
     readonly indexRouter = new IndexRouter(this);
     readonly apiRouter = new APIRouter(this);
     readonly userAgentString = "Livemap /";
-    cachedEntities = {} as Awaited<ReturnType<typeof this.fetchEntities>>;
+    cachedEntities = {} as { server: any; slots: any; players: any[]; vehicles: any[]; };
     chosenServer = "gs";
 
     constructor() {
@@ -53,28 +53,5 @@ export default class App {
                 });
             })
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
-    }
-
-    async fetchEntities() {
-        const server = this.config.servers[this.chosenServer];
-        const stats = await (await fetch(`http://${server.ip}/feed/dedicated-server-stats.json?code=${server.code}`, { headers: { 'User-Agent': `${this.userAgentString}DSS` } })).json();
-        const results = {
-            server: new Server(stats.server),
-            slots: new Slots(stats.slots),
-            players: player.getPlayers(stats.slots.players),
-            vehicles: vehicle.getVehicles(stats.vehicles, stats.server.mapSize)
-        };
-
-        this.cachedEntities = results;
-
-        return results;
-    }
-    
-    async fetchCSG() {
-        const server = this.config.servers[this.chosenServer];
-    
-        const result = await fetch(`http://${server.ip}/feed/dedicated-server-savegame.html?code=${server.code}&file=careerSavegame`, { headers: { 'User-Agent': `${this.userAgentString}CSG` } });
-        
-        return new Game(xml2js(await result.text(), { compact: true }) as FSCSG);
     }
 }

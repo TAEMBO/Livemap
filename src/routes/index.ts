@@ -1,5 +1,11 @@
 import express from 'express';
 import App from '../app.js';
+import Game from '../model/game.js';
+import { xml2js } from 'xml-js';
+import { FSCSG } from '../typings.js';
+import player from '../model/player';
+import vehicle from '../model/vehicle';
+import { Server, Slots } from '../model/server.js';
 
 export default class IndexRouter {
     public readonly router = express.Router();
@@ -16,10 +22,30 @@ export default class IndexRouter {
             .get('/', (req, res) => res.render('serverlist.pug', { server: { name: "Home" }, year: new Date().getFullYear() }));
         
         for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (req, res) => {
-            this._app.chosenServer = key;
-            const server = await this._app.fetchEntities();
-            const savegame = await this._app.fetchCSG();
+            const serverObj = this._app.config.servers[key];
+
+            const server = await (async () => {
+                const stats = await (await fetch(`http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`, { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } })).json();
+                const results = {
+                    server: new Server(stats.server),
+                    slots: new Slots(stats.slots),
+                    players: player.getPlayers(stats.slots.players),
+                    vehicles: vehicle.getVehicles(stats.vehicles, stats.server.mapSize)
+                };
         
+                this._app.cachedEntities = results;
+        
+                return results;
+            })();
+
+            const savegame = await (async () => {
+                const result = await fetch(`http://${serverObj.ip}/feed/dedicated-server-savegame.html?code=${serverObj.code}&file=careerSavegame`, { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } });
+            
+                return new Game(xml2js(await result.text(), { compact: true }) as FSCSG);
+            })();
+        
+
+    
             res.render('home.pug', {
                 game: savegame,
                 isNewServer: savegame.isNewServer,
