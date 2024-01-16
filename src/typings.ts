@@ -151,3 +151,11 @@ export interface Config {
         readonly code: string;
     }>;
 }
+
+export interface BaseLocalOptions extends Record<string, any>{
+    year: number;
+    keys: {
+        key: string;
+        name: string;
+    }[];
+}

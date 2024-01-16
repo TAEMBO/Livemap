@@ -7,10 +7,9 @@ mixin navigation
       ul.navbar.nav
         li.nav-item
           a.button(href='/')=('Home')
-        li.nav-item
-          a.button(href='/cs')=('Corn Silage')
-        li.nav-item
-          a.button(href='/gs')=('Grass Silage')
+        each label in keys
+          li.nav-item
+            a.button(href='/' + label.key)=(label.name)
         li.nav-item
           a.button(type='button', onclick='toggleDarkMode()') Toggle theme
 

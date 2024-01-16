@@ -2,8 +2,8 @@ import express from 'express';
 import App from '../app.js';
 import Game from '../model/game.js';
 import { xml2js } from 'xml-js';
-import { FSCSG, FSDSS } from '../typings.js';
-import { calcCoords, formatTime } from '../libraries/utility.js';
+import { BaseLocalOptions, FSCSG, FSDSS } from '../typings.js';
+import { formatTime } from '../libraries/utility.js';
 import { getIcon, getIconPopup } from '../libraries/icons.js';
 
 export default class IndexRouter {
@@ -20,8 +20,9 @@ export default class IndexRouter {
             })
             .get('/', (_, res) => res.render('serverlist.pug', {
                 dss: { server: { name: "Home" } },
-                year: new Date().getFullYear()
-            }));
+                year: new Date().getFullYear(),
+                keys: this._app.serverLabels
+            } satisfies BaseLocalOptions));
         
         for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (_, res) => {
             const serverObj = this._app.config.servers[key];
@@ -58,8 +59,9 @@ export default class IndexRouter {
                 },
                 csg,
                 isNewServer: csg.isNewServer,
-                year: new Date().getFullYear()
-            });
+                year: new Date().getFullYear(),
+                keys: this._app.serverLabels
+            } satisfies BaseLocalOptions);
         });
     }
 }

@@ -53,7 +53,7 @@ $(document).ready(() => {
         document.querySelectorAll('.list-group-item > a').forEach(x => x.style.setProperty('color', '#000'));
     }
 
-    if (!['/cs', '/gs'].includes(window.location.pathname)) return;
+    if (window.location.pathname === "/") return;
 
     const map = L.map('map', { crs: L.CRS.Simple, maxZoom: 5 });
     const bounds = [[-750, -750], [750, 750]];

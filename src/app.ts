@@ -6,12 +6,13 @@ import IndexRouter from './routes/index.js';
 import APIRouter from './routes/api';
 import config from './config.json';
 import createError from 'http-errors';
-import { Config } from './typings.js';
+import { BaseLocalOptions, Config } from './typings.js';
 
 export default new class App {
     readonly server = express();
     readonly config = config as Config;
     readonly serverKeys = Object.keys(this.config.servers);
+    readonly serverLabels = Object.entries(this.config.servers).map(([key, { name }]) => ({ key, name }));
     readonly indexRouter = new IndexRouter(this);
     readonly apiRouter = new APIRouter(this);
     readonly userAgentString = "Livemap /";
@@ -38,8 +39,9 @@ export default new class App {
             .use((err, _, res, __) => res.status(500).render('error', {
                 dss: { server: { name: "Error" } },
                 year: new Date().getFullYear(),
-                error: err
-            }))
+                error: err,
+                keys: this.serverLabels
+            } satisfies BaseLocalOptions))
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
     }
 }();
