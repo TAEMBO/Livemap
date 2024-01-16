@@ -26,37 +26,38 @@ export default class IndexRouter {
         for (const key of this._app.serverKeys) this.router.get(`/${key}`, async (_, res) => {
             const serverObj = this._app.config.servers[key];
 
-            const server = await (async () => {
-                const stats: FSDSS = await (await fetch(`http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`, { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } })).json();
+            const dssRes = await fetch(
+                `http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`,
+                { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } }
+            );
+            const dss: FSDSS = await dssRes.json();
 
-                this._app.cachedVehicles = stats.vehicles.map(vehicle => ({
-                    name: vehicle.name,
-                    posx: (vehicle.x / (stats.server.mapSize / 2)) * 375,
-                    posy: ((vehicle.z / (stats.server.mapSize / 2)) * 375) * -1,
-                    type: vehicle.type,
-                    category: vehicle.category,
-                    controller: vehicle.controller,
-                    icon: getIcon(vehicle),
-                    popup: getIconPopup(vehicle)
-                }));
+            this._app.cachedVehicles = dss.vehicles.map(vehicle => ({
+                name: vehicle.name,
+                posx: (vehicle.x / (dss.server.mapSize / 2)) * 375,
+                posy: ((vehicle.z / (dss.server.mapSize / 2)) * 375) * -1,
+                type: vehicle.type,
+                category: vehicle.category,
+                controller: vehicle.controller,
+                icon: getIcon(vehicle),
+                popup: getIconPopup(vehicle)
+            }));
+
+            const csgRes = await fetch(
+                `http://${serverObj.ip}/feed/dedicated-server-savegame.html?code=${serverObj.code}&file=careerSavegame`,
+                { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } }
+            );
         
-                return {
-                    server: stats.server,
-                    slots: stats.slots,
-                    players: stats.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) })),
-                };
-            })();
-
-            const savegame = await (async () => {
-                const result = await fetch(`http://${serverObj.ip}/feed/dedicated-server-savegame.html?code=${serverObj.code}&file=careerSavegame`, { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } });
-            
-                return new Game(xml2js(await result.text(), { compact: true }) as FSCSG);
-            })();
+            const csg = new Game(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
 
             res.render('home.pug', {
-                dss: server,
-                csg: savegame,
-                isNewServer: savegame.isNewServer,
+                dss: {
+                    server: dss.server,
+                    slots: dss.slots,
+                    players: dss.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) }))
+                },
+                csg,
+                isNewServer: csg.isNewServer,
                 year: new Date().getFullYear()
             });
         });
