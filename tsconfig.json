@@ -13,6 +13,6 @@
     "typeRoots": [ "node_modules/@types", "./typings" ],
     "outDir": "dist"
   },
-"include": [ "node_modules/@types", "./server", "src/libraries", "src/model", "src/routes", "src/api.ts", "src/app.ts", "src/index.ts" ],
+"include": [ "node_modules/@types", "./server", "src/libraries", "src/model", "src/routes", "src/api.ts", "src/app.ts" ],
 "exclude": [ "node_modules", ".git" ]
 }
