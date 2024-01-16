@@ -6,10 +6,11 @@ import IndexRouter from './routes/index.js';
 import APIRouter from './routes/api';
 import config from './config.json';
 import createError from 'http-errors';
+import { Config } from './typings.js';
 
 export default class App {
     readonly server = express();
-    readonly config = config;
+    readonly config = config as Config;
     readonly serverKeys = Object.keys(this.config.servers);
     readonly indexRouter = new IndexRouter(this);
     readonly apiRouter = new APIRouter(this);

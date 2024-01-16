@@ -1,3 +1,5 @@
+import config from './config.json';
+
 export interface ServerTyping {
     name: string;
     version: string;
@@ -139,4 +141,13 @@ export interface FSDSS {
     readonly vehicles: FSDSSVehicle[];
     readonly mods: FSDSSMod[];
     readonly fields: FSDSSField[];
+}
+
+export interface Config {
+    readonly port: number;
+    readonly servers: Record<string, {
+        readonly name: string;
+        readonly ip: string;
+        readonly code: string;
+    }>;
 }
