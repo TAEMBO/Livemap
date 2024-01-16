@@ -8,7 +8,7 @@ import config from './config.json';
 import createError from 'http-errors';
 import { Config } from './typings.js';
 
-export default class App {
+export default new class App {
     readonly server = express();
     readonly config = config as Config;
     readonly serverKeys = Object.keys(this.config.servers);
@@ -42,4 +42,4 @@ export default class App {
             }))
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
     }
-}
+}();

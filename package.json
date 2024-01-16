@@ -2,7 +2,7 @@
   "name": "livemap",
   "version": "1.0.0",
   "description": "Web-based map view for Farming Simulator MP servers.",
-  "main": "index.js",
+  "main": "app.js",
   "author": "TAEMBO",
   "license": "ISC",
   "dependencies": {

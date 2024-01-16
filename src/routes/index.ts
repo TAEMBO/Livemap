@@ -9,7 +9,7 @@ import { getIcon, getIconPopup } from '../libraries/icons.js';
 export default class IndexRouter {
     public readonly router = express.Router();
 
-    constructor(private readonly _app: App) {
+    constructor(private readonly _app: typeof App) {
         this.router
             .get('*', (req, _, next) => {
                 const ip = req.header('x-forwarded-for') || req.socket.remoteAddress.replace('::ffff:', '');
