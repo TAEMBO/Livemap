@@ -58,7 +58,7 @@ $(document).ready(() => {
     const map = L.map('map', { crs: L.CRS.Simple, maxZoom: 5 });
     const bounds = [[-750, -750], [750, 750]];
 
-    L.imageOverlay('/images/dedicated-server-stats-map.jpg', bounds).addTo(map);
+    L.imageOverlay(`/api/${window.location.pathname.slice(1)}/map.jpg`, bounds).addTo(map);
     map.fitBounds([[-750, -750], [750, 750]]);
     map.setMaxBounds([[-750, -750], [750, 750]]);
 
