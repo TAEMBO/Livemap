@@ -1,9 +1,3 @@
-export function filterFloat(value: string) {
-  if (/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
-    return Number(value);
-  } else return NaN;
-}
-
 export function formatTime(oldTime: number) {
   var Hours = 0;
   var Days = 0
