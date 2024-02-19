@@ -1,5 +1,3 @@
-import config from './config.json';
-
 export interface ServerTyping {
     name: string;
     version: string;
@@ -106,14 +104,14 @@ interface FSDSSSlots {
     readonly players: FSDSSPlayer[];
 }
 
-interface FSDSSVehicle {
+export interface FSDSSVehicle {
     readonly name: string;
     readonly category: string;
     readonly type: string;
     readonly x: number;
     readonly y: number;
     readonly z: number;
-    readonly fills: {
+    readonly fills?: {
         readonly type: string;
         readonly level: number;
     }[];
