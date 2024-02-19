@@ -1,12 +1,7 @@
-import * as utility from './utility.js';
-import { icons } from './iconList.js';
+import icons from './iconList.js';
+import { FSDSSVehicle } from 'src/typings.js';
 
-interface FillData {
-    type: string[];
-    level: number[];
-}
-
-function getIcon(object) {
+function getIcon(object: FSDSSVehicle) {
     if ('controller' in object) return icons['controller']
     else if (icons.hasOwnProperty(object.category.toLowerCase())) return icons[object.category.toLowerCase()]
     else if (icons.hasOwnProperty(object.type.toLowerCase())) return icons[object.type.toLowerCase()]
@@ -14,22 +9,20 @@ function getIcon(object) {
     return icons['default']
 }
 
-function getIconPopup(object) {
-    var popup = '<b>'+ object.name +'</b>';
-    popup += '<small>';
+function getIconPopup(vehicle: FSDSSVehicle) {
+    let popup = `<b>${vehicle.name}</b><small>`;
 
-    const fillData = {
-        type: object.fills && object.fills.map((x: FillData) => x.type.toString().toLowerCase().replace('grass_windrow', 'grass')),
-        level: object.fills && object.fills.map((x: FillData) => x.level)
+    const fillData = !vehicle.fills ? null : vehicle.fills.filter(fill => !["UNKNOWN", "DIESEL", "DEF", "AIR"].includes(fill.type));
+
+    if (fillData && !fillData.length) {
+        popup += "<br>Empty";
+    } else if (fillData) {
+        popup += fillData.map(x => {
+            return `<br><span style="text-transform: capitalize;">${x.type.toLowerCase()}</span> (${x.level.toLocaleString('en-US')})`;
+        }).join("");
     }
 
-    if (!isNaN(utility.filterFloat(fillData.level))) {
-        if (fillData.type != 'unknown') popup += '<br><span style="text-transform: capitalize;">'+ fillData.type +'</span> ('+ parseInt(fillData.level).toLocaleString('en-US') +')';
-        else if (fillData.type.includes('unknown')) popup += '<br>Empty';
-    }
-
-    if (object.isAIActive === 'true') popup += '<br>Helper: Active';
-    if (object.controller) popup += '<br>Player: '+ object.controller;
+    if (vehicle.controller) popup += `<br>Player: ${vehicle.controller}`;
 
     popup += '</small>';
 
