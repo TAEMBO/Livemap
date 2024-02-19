@@ -8,282 +8,282 @@
  */
 
 export default {
-    'default': {
+    default: {
         icon: 'default.png',
         desc: 'No icon',
         dimension: 12
     },
-    'harvesters': {
+    harvesters: {
         icon: 'harvester.png',
         desc: 'Harvester',
         dimension: 12
     },
-    'forageharvesters': {
+    forageharvesters: {
         icon: 'harvester.png',
         desc: 'Forage Harvester',
         dimension: 12
     },
-    'foragewagon': {
+    foragewagon: {
         icon: 'trailer.png',
         desc: 'Loading Wagon',
         dimension: 12
     },
-    'tractorsl': {
+    tractorsl: {
         icon: 'vehicle.png',
         desc: 'Large Tractors',
         dimension: 12
     },
-    'tractorsm': {
+    tractorsm: {
         icon: 'vehicle.png',
         desc: 'Medium Tractors',
         dimension: 12
     },
-    'tractorss': {
+    tractorss: {
         icon: 'vehicle.png',
         desc: 'Small Tractors',
         dimension: 12
     },
-    'miscvehicles': {
+    miscvehicles: {
         icon: 'ropa.png',
         desc: 'Misc. Vehicles',
         dimension: 12
     },
-    'windrower': {
+    windrower: {
         icon: 'tool.png',
         desc: 'Windrowers',
         dimension: 12
     },
-    'planters': {
+    planters: {
         icon: 'tool.png',
         desc: 'Planters',
         dimension: 12
     },
-    'trailer': {
+    trailer: {
         icon: 'trailer.png',
         desc: 'Traielrs',
         dimension: 12
     },
-    'car': {
+    car: {
         icon: 'vehicle.png',
         desc: 'Cars',
         dimension: 12
     },
-    'trucks': {
+    trucks: {
         icon: 'vehicle.png',
         desc: 'Trucks',
         dimension: 12
     },
-    'cultivator': {
+    cultivator: {
         icon: 'tool.png',
         desc: 'Cultivators',
         dimension: 12
     },
-    'fertilizerspreaders': {
+    fertilizerspreaders: {
         icon: 'tool.png',
         desc: 'Fertilizer Spreaders',
         dimension: 12
     },
-    'forklifts': {
+    forklifts: {
         icon: 'vehicle.png',
         desc: 'Forklifts',
         dimension: 12
     },
-    'watertrailer': {
+    watertrailer: {
         icon: 'trailer.png',
         desc: 'Water Trailers',
         dimension: 12
     },
-    'seeders': {
+    seeders: {
         icon: 'tool.png',
         desc: 'Seeders',
         dimension: 12
     },
-    'traintrailer': {
+    traintrailer: {
         icon: 'train.png',
         desc: 'Train carts',
         dimension: 12
     },
-    'traintimbertrailer': {
+    traintimbertrailer: {
         icon: 'train.png',
         desc: 'Train timber carts',
         dimension: 12
     },
-    'bigbags': {
+    bigbags: {
         icon: 'crate.png',
         desc: 'Bigbags',
         dimension: 16
     },
-    'bigbagpallets': {
+    bigbagpallets: {
         icon: 'crate.png',
         desc: 'Bigbag Pallets',
         dimension: 16
     },
-    'pallets': {
+    pallets: {
         icon: 'crate.png',
         desc: 'Pallets',
         dimension: 16
     },
-    'wheelloadertools': {
+    wheelloadertools: {
         icon: 'tool.png',
         desc: 'Wheel loader tools',
         dimension: 12
     },
-    'wheelloadervehicles': {
+    wheelloadervehicles: {
         icon: 'vehicle.png',
         desc: 'Wheel loaders',
         dimension: 12
     },
-    'teleloadertools': {
+    teleloadertools: {
         icon: 'tool.png',
         desc: 'Telehandler tools',
         dimension: 12
     },
-    'teleloadervehicles': {
+    teleloadervehicles: {
         icon: 'vehicle.png',
         desc: 'Telehandlers',
         dimension: 12
     },
-    'frontloadertools': {
+    frontloadertools: {
         icon: 'tool.png',
         desc: 'Front-loader tools',
         dimension: 12
     },
-    'skidsteertools': {
+    skidsteertools: {
         icon: 'tool.png',
         desc: 'Skidsteer tools',
         dimension: 12
     },
-    'skidsteervehicles': {
+    skidsteervehicles: {
         icon: 'vehicle.png',
         desc: 'Skidsteers',
         dimension: 12
     },
-    'forageharvestercutters': {
+    forageharvestercutters: {
         icon: 'tool.png',
         desc: 'Forage Harvester Cutters',
         dimension: 12
     },
-    'mowervehicles': {
+    mowervehicles: {
         icon: 'mower.png',
         desc: 'Self-propelled Mowers',
         dimension: 12
     },
-    'selfpropelledsprayer': {
+    selfpropelledsprayer: {
         icon: 'vehicle.png',
         desc: 'Self-propelled Sprayers',
         dimension: 12
     },
-    'augerwagon': {
+    augerwagon: {
         icon: 'trailer.png',
         desc: 'Auger wagons',
         dimension: 12
     },
-    'baleloaders': {
+    baleloaders: {
         icon: 'tool.png',
         desc: 'Bale loaders',
         dimension: 12
     },
-    'baler': {
+    baler: {
         icon: 'tool.png',
         desc: 'Balers',
         dimension: 12
     },
-    'balewrapper': {
+    balewrapper: {
         icon: 'tool.png',
         desc: 'Bale Wrappers',
         dimension: 12
     },
-    'cutter': {
+    cutter: {
         icon: 'tool.png',
         desc: 'Combine Harvester Cutters',
         dimension: 12
     },
-    'handtoolmower': {
+    handtoolmower: {
         icon: 'mower.png',
         desc: 'Hand-tool Mowers',
         dimension: 12
     },
-    'plows': {
+    plows: {
         icon: 'tool.png',
         desc: 'Plows',
         dimension: 12
     },
-    'weights': {
+    weights: {
         icon: 'tool.png',
         desc: 'Weights',
         dimension: 12
     },
-    'cuttertrailers': {
+    cuttertrailers: {
         icon: 'trailer.png',
         desc: 'Cutter trailers',
         dimension: 12
     },
-    'rollers': {
+    rollers: {
         icon: 'tool.png',
         desc: 'Field rollers',
         dimension: 12
     },
-    'attachablefrontloader': {
+    attachablefrontloader: {
         icon: 'tool.png',
         desc: 'Front-loaders',
         dimension: 12
     },
-    'mower': {
+    mower: {
         icon: 'mower.png',
         desc: 'Mowers',
         dimension: 12
     },
-    'tedders': {
+    tedders: {
         icon: 'tool.png',
         desc: 'Tedders',
         dimension: 12
     },
-    'slurrytanks': {
+    slurrytanks: {
         icon: 'tool.png',
         desc: 'Slurry Tankers',
         dimension: 12
     },
-    'slurryvehicles': {
+    slurryvehicles: {
         icon: 'vehicle.png',
         desc: 'Slurry Vehicles',
         dimension: 12
     },
-    'drivablemixerwagon': {
+    drivablemixerwagon: {
         icon: 'vehicle.png',
         desc: 'Self-propelled TMR Mixers',
         dimension: 12
     },
-    'grapetools': {
+    grapetools: {
         icon: 'tool.png',
         desc: 'Grape tools',
         dimension: 12
     },
-    'vineharvester': {
+    vineharvester: {
         icon: 'harvester.png',
         desc: 'Vineyard Harvesters',
         dimension: 12
     },
-    'mixerwagon': {
+    ixerwagon: {
         icon: 'tool.png',
         desc: 'Mixer Wagons',
         dimension: 12
     },
-    'cranetrailer': {
+    ranetrailer: {
         icon: 'trailer.png',
         desc: 'Forestry Trailers',
         dimension: 12
     },
-    'stumpcutter': {
+    tumpcutter: {
         icon: 'tool.png',
         desc: 'Stump Cutters',
         dimension: 12
     },
-    'misc': {
+    isc: {
         icon: 'ropa.png',
         desc: 'Misc.',
         dimension: 12
     },
-    'controller': {
+    controller: {
         icon: 'controller.png',
         desc: 'Player',
         dimension: 12
