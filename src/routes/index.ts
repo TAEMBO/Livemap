@@ -12,7 +12,7 @@ export default class IndexRouter {
     constructor(private readonly _app: typeof App) {
         this.router
             .get('*', (req, _, next) => {
-                const ip = req.header('x-forwarded-for') || req.socket.remoteAddress.replace('::ffff:', '');
+                const ip = req.header('x-forwarded-for') || req.socket.remoteAddress?.replace('::ffff:', '');
 
                 if (!req.originalUrl.includes('api')) console.log(`[${(new Date()).toLocaleString("en-GB")}] ${ip} - ${req.originalUrl}`);
 
@@ -49,7 +49,7 @@ export default class IndexRouter {
                 { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } }
             );
         
-            const csg = new Game(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
+            const csg = Game(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
 
             res.render('home.pug', {
                 dss: {

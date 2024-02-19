@@ -6,6 +6,7 @@ export function filterFloat(value: string) {
 
 export function formatTime(oldTime: number) {
   var Hours = 0;
+  var Days = 0
   oldTime = Math.floor(oldTime);
 
   if (oldTime >= 60) {
@@ -14,8 +15,8 @@ export function formatTime(oldTime: number) {
   } else Minutes = oldTime;
 
   if (Hours >= 24) {
-    var Days = Math.floor(Hours / 24);
-    var Hours = (Hours - (Days * 24));
+    Days = Math.floor(Hours / 24);
+    Hours = (Hours - (Days * 24));
   }
   return (Days > 0 ? Days + 'd ' : '') + (Hours > 0 ? Hours + 'h ' : '') + (Minutes > 0 ? Minutes + 'm' : '');
 }

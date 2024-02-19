@@ -3,8 +3,8 @@ import { FSDSSVehicle } from 'src/typings.js';
 
 function getIcon(object: FSDSSVehicle) {
     if ('controller' in object) return icons['controller']
-    else if (icons.hasOwnProperty(object.category.toLowerCase())) return icons[object.category.toLowerCase()]
-    else if (icons.hasOwnProperty(object.type.toLowerCase())) return icons[object.type.toLowerCase()]
+    else if (icons.hasOwnProperty(object.category.toLowerCase())) return icons[object.category.toLowerCase() as keyof typeof icons]
+    else if (icons.hasOwnProperty(object.type.toLowerCase())) return icons[object.type.toLowerCase() as keyof typeof icons]
 
     return icons['default']
 }
