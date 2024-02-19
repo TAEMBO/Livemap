@@ -1,24 +1,7 @@
-import xjs from 'xml-js';
-
-export function c2json(xml) {
-  var res = xjs.xml2js(xml, { compact:true });
-  return res;
-}
-
 export function filterFloat(value: string) {
   if (/^(\-|\+)?([0-9]+(\.[0-9]+)?|Infinity)$/.test(value)) {
     return Number(value);
   } else return NaN;
-}
-
-export function calcCoords(size: number, x: number, y: number) {
-  var newX = null;
-  var newY = null;
-  if (x != null && y != null) {
-    newX = (x / (size / 2)) * 375;
-    newY = ((y / (size / 2)) * 375) * (-1);
-  }
-  return { x: newX, y: newY };
 }
 
 export function formatTime(oldTime: number) {
@@ -38,6 +21,5 @@ export function formatTime(oldTime: number) {
 }
 
 export function formatNumber(number: number, digits: number, icon: string) {
-  var n = number;
-  return n.toLocaleString(undefined, { minimumFractionDigits: digits }) + icon;
+    return number.toLocaleString(undefined, { minimumFractionDigits: digits }) + icon;
 }
