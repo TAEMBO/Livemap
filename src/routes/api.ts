@@ -19,7 +19,7 @@ export default class APIRouter {
             }));
 
             for (const key of this._app.serverKeys) {
-                this.router.get(`/${key}/map.jpg`, async (req, res) => {
+                this.router.get(`/${key}/map.jpg`, async (_, res) => {
                     const server = this._app.config.servers[key];
 
                     const mapRes = await fetch(

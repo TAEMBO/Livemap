@@ -29,7 +29,7 @@ export default new class App {
             .use(cookieParser())
             .use('/', this.indexRouter.router)
             .use('/api', this.apiRouter.router)
-            .use((req, res, next) => {
+            .use((_, res, next) => {
                 if (res.status(404)) {
                   next(createError(404));
                 } else {
