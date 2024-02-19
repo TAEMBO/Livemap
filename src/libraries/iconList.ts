@@ -7,7 +7,7 @@
  * Default: 12 for equipment, 16 for pallets.
  */
 
-const icons = {
+export default {
     'default': {
         icon: 'default.png',
         desc: 'No icon',
@@ -289,67 +289,3 @@ const icons = {
         dimension: 12
     }
 }
-
-const types = {
-    'default': icons.default,
-    'harvesters': icons.harvesters,
-    'forageharvesters': icons.forageharvesters,
-    'foragewagon': icons.foragewagon,
-    'tractorsl': icons.tractorsl,
-    'tractorsm': icons.tractorsm,
-    'tractorss': icons.tractorss,
-    'miscvehicles': icons.miscvehicles,
-    'windrower': icons.windrower,
-    'planters': icons.planters,
-    'trailer': icons.trailer,
-    'car': icons.car,
-    'trucks': icons.trucks,
-    'cultivator': icons.cultivator,
-    'fertilizerspreaders': icons.fertilizerspreaders,
-    'forklifts': icons.forklifts,
-    'watertrailer': icons.watertrailer,
-    'seeders': icons.seeders,
-    'traintrailer': icons.traintrailer,
-    'traintimbertrailer': icons.traintimbertrailer,
-    'bigbags': icons.bigbags,
-    'bigbagpallets': icons.bigbagpallets,
-    'pallets': icons.pallets,
-    'wheelloadertools': icons.wheelloadertools,
-    'wheelloadervehicles': icons.wheelloadervehicles,
-    'teleloadertools': icons.teleloadertools,
-    'teleloadervehicles': icons.teleloadertools,
-    'frontloadertools': icons.frontloadertools,
-    'skidsteertools': icons.skidsteertools,
-    'skidsteervehicles': icons.skidsteervehicles,
-    'forageharvestercutters': icons.forageharvestercutters,
-    'mowervehicles': icons.mowervehicles,
-    'selfpropelledsprayer': icons.selfpropelledsprayer,
-    'augerwagon': icons.augerwagon,
-    'baleloader': icons.baleloaders,
-    'baler': icons.baler,
-    'balewrapper': icons.balewrapper,
-    'cutter': icons.cutter,
-    'handtoolmower': icons.handtoolmower,
-    'plows': icons.plows,
-    'weights': icons.weights,
-    'cuttertrailers': icons.cuttertrailers,
-    'rollers': icons.rollers,
-    'attachablefrontloader': icons.attachablefrontloader,
-    'mower': icons.mower,
-    'tedders': icons.tedders,
-    'slurrytanks': icons.slurrytanks,
-    'slurryvehicles': icons.slurryvehicles,
-    'drivablemixerwagon': icons.drivablemixerwagon,
-    'grapetools': icons.grapetools,
-    'vineharvester': icons.vineharvester,
-    'mixerwagon': icons.mixerwagon,
-    'cranetrailer': icons.cranetrailer,
-    'stumpcutter': icons.stumpcutter,
-    'misc': icons.misc,
-    'controller': icons.controller
-};
-
-export {
-    icons,
-    types
-};
