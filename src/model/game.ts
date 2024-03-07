@@ -3,32 +3,28 @@ import * as utility from '../libraries/utility.js';
 
 export default function Game(game: FSCSG) {
     const gameSettings = game.careerSavegame?.settings;
-    const gameSlotSystem = game.careerSavegame?.slotSystem._attributes;
-    const gameStatistics = game.careerSavegame?.statistics;
 
     return {
-        isNewServer: game.careerSavegame === undefined ? true : false,
-        money: gameStatistics?.money._text == undefined ? '0 $' : utility.formatNumber(parseInt(gameStatistics.money._text), 0, ' $'),
-        mapTitle: gameSettings?.mapTitle._text == undefined ? 'No map selected' : gameSettings.mapTitle._text,
-        timeScale: utility.formatNumber(gameSettings?.timeScale._text == undefined ? 0 : Number(gameSettings.timeScale._text), 0, 'x'),
-        saveInterval: gameSettings?.autoSaveInterval._text == undefined ? '? mins' : utility.formatNumber(parseInt(gameSettings.autoSaveInterval._text), 0, ' mins'),
-        economicDifficulty: gameSettings?.economicDifficulty._text == undefined ? 1 : gameSettings.economicDifficulty._text,
-        fixedSeasonalVisuals: gameSettings?.fixedSeasonalVisuals?._text == undefined ? 'nil' : gameSettings.fixedSeasonalVisuals._text,
-        growthMode: gameSettings?.growthMode._text == undefined ? '3' : gameSettings.growthMode._text,
-        fuelUsage: gameSettings?.fuelUsage._text == undefined ? '3' : gameSettings.fuelUsage._text,
-        dirtInterval: gameSettings?.dirtInterval._text == undefined ? '3' : gameSettings.dirtInterval._text,
-        savegameName: gameSettings?.savegameName._text == undefined ? 'No save' : gameSettings.savegameName._text,
-        helperBuyFuel: (gameSettings?.helperBuyFuel._text) == undefined ? 'false' : (gameSettings.helperBuyFuel._text),
-        helperBuySeeds: (gameSettings?.helperBuySeeds._text) == undefined ? 'false' : (gameSettings.helperBuySeeds._text),
-        helperBuyFertilizer: (gameSettings?.helperBuyFertilizer._text) == undefined ? 'false' : (gameSettings.helperBuyFertilizer._text),
-        helperSlurrySource: gameSettings?.helperSlurrySource._text == undefined ? 1 : utility.formatNumber(parseInt(gameSettings.helperSlurrySource._text), 0, ''),
-        helperManureSource: gameSettings?.helperManureSource._text == undefined ? 1 : utility.formatNumber(parseInt(gameSettings.helperManureSource._text), 0, ''),
-        slotUsage: gameSlotSystem?.slotUsage == undefined ? 0 : Number(gameSlotSystem.slotUsage).toLocaleString('en-US'),
-        creationDate: gameSettings?.creationDate == undefined ? '31/12/1969' : (gameSettings.creationDate._text).split('-').reverse().join('/'),
-        fruitDestruction: gameSettings?.fruitDestruction._text == undefined ? 'true' : gameSettings.fruitDestruction._text,
-        plowingRequiredEnabled: gameSettings?.plowingRequiredEnabled._text == undefined ? 'true' : gameSettings.plowingRequiredEnabled._text,
-        automaticMotorStartEnabled: gameSettings?.automaticMotorStartEnabled._text == undefined ? 'true' : gameSettings.automaticMotorStartEnabled._text,
-
-
+        isNewServer: Boolean(game.careerSavegame),
+        money: utility.formatNumber(parseInt(game.careerSavegame.statistics.money._text ?? "0"), 0, ' $'),
+        mapTitle: gameSettings?.mapTitle._text ?? 'No map selected',
+        timeScale: utility.formatNumber(parseInt(gameSettings?.timeScale._text ?? "0"), 0, 'x'),
+        saveInterval: utility.formatNumber(parseInt(gameSettings?.autoSaveInterval._text ?? "0"), 0, ' mins'),
+        economicDifficulty: gameSettings?.economicDifficulty._text ?? 1,
+        fixedSeasonalVisuals: gameSettings?.fixedSeasonalVisuals?._text ?? 'nil',
+        growthMode: gameSettings?.growthMode._text ?? '3',
+        fuelUsage: gameSettings?.fuelUsage._text ?? '3',
+        dirtInterval: gameSettings?.dirtInterval._text ?? '3',
+        savegameName: gameSettings?.savegameName._text ?? 'No save',
+        helperBuyFuel: gameSettings?.helperBuyFuel._text ?? 'false',
+        helperBuySeeds: gameSettings?.helperBuySeeds._text ?? 'false',
+        helperBuyFertilizer: gameSettings?.helperBuyFertilizer._text ?? 'false',
+        helperSlurrySource: utility.formatNumber(parseInt(gameSettings?.helperSlurrySource._text ?? "1"), 0, ''),
+        helperManureSource: utility.formatNumber(parseInt(gameSettings?.helperManureSource._text ?? "1"), 0, ''),
+        slotUsage: Number(game.careerSavegame.slotSystem._attributes.slotUsage ?? 0).toLocaleString('en-US'),
+        creationDate: gameSettings?.creationDate._text ?? "0000-00-00",
+        fruitDestruction: gameSettings?.fruitDestruction._text ?? 'true',
+        plowingRequiredEnabled: gameSettings?.plowingRequiredEnabled._text ?? 'true',
+        automaticMotorStartEnabled: gameSettings?.automaticMotorStartEnabled._text ?? 'true',
     }
 }
