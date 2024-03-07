@@ -1,17 +1,4 @@
-import icons from './iconList.js';
-import { FSDSSVehicle } from 'src/typings.js';
-
-export function getIcon(object: FSDSSVehicle) {
-    let controller = icons[object.category.toLowerCase()];
-    
-    controller ??= icons[object.type.toLowerCase()];
-    
-    if (object.controller) controller = icons.controller;
-    
-    controller ??= icons.default;
-
-    return controller;
-}
+import { FSDSSVehicle } from "../typings.js";
 
 export function getIconPopup(vehicle: FSDSSVehicle) {
     let popupHTML = `<b>${vehicle.name}</b><small>`;

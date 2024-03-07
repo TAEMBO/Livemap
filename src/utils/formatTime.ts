@@ -4,7 +4,3 @@ export function formatTime(uptime: number) {
 
     return `${playTimeHrs ? playTimeHrs + "h" : ""} ${playTimeMins}m`;
 }
-
-export function formatNumber(number: number, digits: number, icon: string) {
-    return number.toLocaleString(undefined, { minimumFractionDigits: digits }) + icon;
-}

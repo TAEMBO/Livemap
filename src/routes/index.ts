@@ -1,10 +1,8 @@
-import express from 'express';
 import App from '../app.js';
-import Game from '../model/game.js';
+import express from 'express';
 import { xml2js } from 'xml-js';
+import { formatTime, getIcon, getIconPopup, getSavegameData } from "../utils/index.js";
 import { BaseLocalOptions, FSCSG, FSDSS } from '../typings.js';
-import { formatTime } from '../libraries/utility.js';
-import { getIcon, getIconPopup } from '../libraries/icons.js';
 
 export default class IndexRouter {
     public readonly router = express.Router();
@@ -49,7 +47,7 @@ export default class IndexRouter {
                 { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } }
             );
         
-            const csg = Game(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
+            const csg = getSavegameData(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
 
             res.render('home.pug', {
                 dss: {

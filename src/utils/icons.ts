@@ -7,7 +7,7 @@
  * Default: 12 for equipment, 16 for pallets.
  */
 
-export default {
+export const icons = {
     default: {
         icon: 'default.png',
         desc: 'No icon',
