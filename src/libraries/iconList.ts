@@ -278,7 +278,7 @@ export default {
         desc: 'Stump Cutters',
         dimension: 12
     },
-    isc: {
+    misc: {
         icon: 'ropa.png',
         desc: 'Misc.',
         dimension: 12
@@ -288,4 +288,8 @@ export default {
         desc: 'Player',
         dimension: 12
     }
-}
+} as Record<string, {
+    icon: string;
+    desc: string;
+    dimension: number;
+}>;

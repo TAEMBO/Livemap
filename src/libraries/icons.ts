@@ -2,11 +2,15 @@ import icons from './iconList.js';
 import { FSDSSVehicle } from 'src/typings.js';
 
 export function getIcon(object: FSDSSVehicle) {
-    if ('controller' in object) return icons.controller
-    else if (icons.hasOwnProperty(object.category.toLowerCase())) return icons[object.category.toLowerCase() as keyof typeof icons]
-    else if (icons.hasOwnProperty(object.type.toLowerCase())) return icons[object.type.toLowerCase() as keyof typeof icons]
+    let controller = icons[object.category.toLowerCase()];
+    
+    controller ??= icons[object.type.toLowerCase()];
+    
+    if (object.controller) controller = icons.controller;
+    
+    controller ??= icons.default;
 
-    return icons['default']
+    return controller;
 }
 
 export function getIconPopup(vehicle: FSDSSVehicle) {
