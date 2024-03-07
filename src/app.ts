@@ -1,11 +1,11 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import engines from 'consolidate';
 import path from 'node:path';
 import cookieParser from 'cookie-parser';
 import IndexRouter from './routes/index.js';
 import APIRouter from './routes/api.js';
 import config from './config.json' assert { type: "json" };
-import createError from 'http-errors';
+import createError, { HttpError } from 'http-errors';
 import { Config } from './typings.js';
 
 export default new class App {
@@ -36,6 +36,19 @@ export default new class App {
                   next(createError(res.status(503)));
                 }
             })
+            .use(async (err: HttpError, _: Request, res: Response, __: NextFunction) => {
+                res.status(err.statusCode);
+                res.render('error.pug', {
+                    dss: { server: { name: "Error" } },
+                    year: new Date().getFullYear(),
+                    keys: this.serverLabels,
+                    error: err
+                });
+            })
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
+
+        process.on("uncaughtException", console.error);
+        process.on("unhandledRejection", console.error);
+        
     }
 }();
