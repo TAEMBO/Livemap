@@ -1,17 +1,3 @@
-export interface ServerTyping {
-    name: string;
-    version: string;
-}
-
-export interface SlotsTyping {
-    used: number;
-    capacity: number;
-}
-
-export type Empty<T> = {
-    [K in keyof T]: undefined;
-};
-
 export interface FSCSG {
     readonly careerSavegame: {
         readonly settings?: {
@@ -73,79 +59,11 @@ export interface FSCSG {
     }
 }
 
-interface FSDSSPlayerCoordinates {
-    readonly x: number;
-    readonly y: number;
-    readonly z: number;
-}
-
-export type FSDSSPlayer = {
-    readonly isUsed: boolean;
-    readonly isAdmin: boolean;
-    readonly uptime: number;
-    readonly name: string;
-} & (Empty<FSDSSPlayerCoordinates> | FSDSSPlayerCoordinates);
-
-interface FSDSSServer {
-    readonly dayTime: number;
-    readonly game: string;
-    readonly mapName: string;
-    readonly mapSize: number;
-    readonly mapOverviewFilename: string;
-    readonly money: number;
-    readonly name: string;
-    readonly server: string;
-    readonly version: string;
-}
-
-interface FSDSSSlots {
-    readonly capacity: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
-    readonly used: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16;
-    readonly players: FSDSSPlayer[];
-}
-
-export interface FSDSSVehicle {
-    readonly name: string;
-    readonly category: string;
-    readonly type: string;
-    readonly x: number;
-    readonly y: number;
-    readonly z: number;
-    readonly fills?: {
-        readonly type: string;
-        readonly level: number;
-    }[];
-    readonly controller?: string;
-}
-
-interface FSDSSMod {
-    readonly author: string;
-    readonly hash: string;
-    readonly name: string;
-    readonly version: string;
-    readonly description: string;
-}
-
-interface FSDSSField {
-    readonly id: number;
-    readonly isOwned: boolean;
-    readonly x: number;
-    readonly z: number;
-}
-
-export interface FSDSS {
-    readonly server: FSDSSServer;
-    readonly slots: FSDSSSlots;
-    readonly vehicles: FSDSSVehicle[];
-    readonly mods: FSDSSMod[];
-    readonly fields: FSDSSField[];
-}
-
 export interface Config {
     readonly port: number;
     readonly servers: Record<string, {
         readonly name: string;
-        readonly ip: string;
+        readonly url: string;
         readonly code: string;
     }>;
 }

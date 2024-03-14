@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express';
+import express, { Request, Response } from 'express';
 import engines from 'consolidate';
 import path from 'node:path';
 import cookieParser from 'cookie-parser';
@@ -36,7 +36,7 @@ export default new class App {
                   next(createError(res.status(503)));
                 }
             })
-            .use(async (err: HttpError, _: Request, res: Response, __: NextFunction) => {
+            .use((err: HttpError, _: Request, res: Response) => {
                 res.status(err.statusCode);
                 res.render('error.pug', {
                     dss: { server: { name: "Error" } },

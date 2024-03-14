@@ -1,7 +1,7 @@
 import { icons } from "./icons.js";
-import { FSDSSVehicle } from "../typings.js";
+import { type Vehicle } from "farming-simulator-types/2022";
 
-export function getIcon(object: FSDSSVehicle) {
+export function getIcon(object: Vehicle) {
     let controller = icons[object.category.toLowerCase()];
     
     controller ??= icons[object.type.toLowerCase()];

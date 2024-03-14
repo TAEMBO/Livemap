@@ -1,6 +1,6 @@
-import { FSDSSVehicle } from "../typings.js";
+import { type Vehicle } from "farming-simulator-types/2022";
 
-export function getIconPopup(vehicle: FSDSSVehicle) {
+export function getIconPopup(vehicle: Vehicle) {
     let popupHTML = `<b>${vehicle.name}</b><small>`;
 
     // Filter irrelevant fills, if any

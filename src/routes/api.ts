@@ -1,4 +1,5 @@
 import express from 'express';
+import { Feeds } from 'farming-simulator-types/2022';
 import App from '../app.js';
 
 export default class APIRouter {
@@ -23,7 +24,7 @@ export default class APIRouter {
                     const server = this._app.config.servers[key];
 
                     const mapRes = await fetch(
-                        `http://${server.ip}/feed/dedicated-server-stats-map.jpg?code=${server.code}&quality=120&size=2048`,
+                        server.url + Feeds.dedicatedServerStatsMap(server.code, 120, 2048),
                         { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } }
                     );
 

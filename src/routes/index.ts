@@ -1,8 +1,9 @@
 import App from '../app.js';
 import express from 'express';
+import { DSSExtension, DSSFile, type DSSResponse, Feeds, filterUnused } from 'farming-simulator-types/2022';
 import { xml2js } from 'xml-js';
 import { formatTime, getIcon, getIconPopup, getSavegameData } from "../utils/index.js";
-import { BaseLocalOptions, FSCSG, FSDSS } from '../typings.js';
+import { BaseLocalOptions, FSCSG } from '../typings.js';
 
 export default class IndexRouter {
     public readonly router = express.Router();
@@ -26,10 +27,12 @@ export default class IndexRouter {
             const serverObj = this._app.config.servers[key];
 
             const dssRes = await fetch(
-                `http://${serverObj.ip}/feed/dedicated-server-stats.json?code=${serverObj.code}`,
+                serverObj.url + Feeds.dedicatedServerStats(serverObj.code, DSSExtension.JSON),
                 { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } }
             );
-            const dss: FSDSS = await dssRes.json();
+            const dss: DSSResponse = await dssRes.json();
+
+            if (!dss.slots) throw new Error("Missing DSS object: " + serverObj.name);
 
             this._app.cachedVehicles = dss.vehicles.map(vehicle => ({
                 name: vehicle.name,
@@ -43,17 +46,16 @@ export default class IndexRouter {
             }));
 
             const csgRes = await fetch(
-                `http://${serverObj.ip}/feed/dedicated-server-savegame.html?code=${serverObj.code}&file=careerSavegame`,
+                serverObj.url + Feeds.dedicatedServerSavegame(serverObj.code, DSSFile.CareerSavegame),
                 { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } }
             );
-        
             const csg = getSavegameData(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
 
             res.render('home.pug', {
                 dss: {
                     server: dss.server,
                     slots: dss.slots,
-                    players: dss.slots.players.filter(x => x.isUsed).map(x => ({ ...x, uptime: formatTime(x.uptime) }))
+                    players: filterUnused(dss.slots.players).map(x => ({ ...x, uptime: formatTime(x.uptime) }))
                 },
                 csg,
                 isNewServer: csg.isNewServer,

@@ -10,6 +10,7 @@
     "consolidate": "^1.0.3",
     "cookie-parser": "^1.4.6",
     "express": "^4.18.3",
+    "farming-simulator-types": "^1.4.1",
     "http-errors": "^2.0.0",
     "pug": "^3.0.2",
     "xml-js": "^1.6.11"
