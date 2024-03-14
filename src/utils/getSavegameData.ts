@@ -5,10 +5,10 @@ export function getSavegameData(game: FSCSG) {
     const gameSettings = game.careerSavegame?.settings;
 
     return {
-        isNewServer: Boolean(game.careerSavegame),
+        isNewServer: !Boolean(game.careerSavegame),
         money: formatNumber(parseInt(game.careerSavegame.statistics.money._text ?? "0"), ' $'),
         mapTitle: gameSettings?.mapTitle._text ?? 'No map selected',
-        timeScale: formatNumber(parseInt(gameSettings?.timeScale._text ?? "0"), 'x'),
+        timeScale: formatNumber(parseFloat(gameSettings?.timeScale._text ?? "0"), 'x'),
         saveInterval: formatNumber(parseInt(gameSettings?.autoSaveInterval._text ?? "0"), ' mins'),
         economicDifficulty: gameSettings?.economicDifficulty._text ?? 1,
         fixedSeasonalVisuals: gameSettings?.fixedSeasonalVisuals?._text ?? 'nil',
