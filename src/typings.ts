@@ -1,6 +1,6 @@
 export interface FSCSG {
     readonly careerSavegame: {
-        readonly settings?: {
+        readonly settings: {
             readonly savegameName: { readonly _text: string; };
             readonly creationDate: { readonly _text: string; },
             readonly mapId: { readonly _text: string; };

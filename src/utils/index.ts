@@ -1,4 +1,3 @@
-export * from "./formatNumber.js";
 export * from "./formatTime.js";
 export * from "./getIcon.js";
 export * from "./getIconPopup.js";
