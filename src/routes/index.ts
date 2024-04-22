@@ -1,23 +1,23 @@
-import App from '../app.js';
-import express from 'express';
-import { DSSExtension, DSSFile, type DSSResponse, Feeds, filterUnused } from 'farming-simulator-types/2022';
-import { xml2js } from 'xml-js';
+import App from "../app.js";
+import express from "express";
+import { DSSExtension, DSSFile, type DSSResponse, Feeds, filterUnused } from "farming-simulator-types/2022";
+import { xml2js } from "xml-js";
 import { formatTime, getIcon, getIconPopup, getSavegameData } from "../utils/index.js";
-import { BaseLocalOptions, FSCSG } from '../typings.js';
+import { BaseLocalOptions, FSCSG } from "../typings.js";
 
 export default class IndexRouter {
     public readonly router = express.Router();
 
-    constructor(private readonly _app: typeof App) {
+    public constructor(private readonly _app: typeof App) {
         this.router
-            .get('*', (req, _, next) => {
-                const ip = req.header('x-forwarded-for') || req.socket.remoteAddress?.replace('::ffff:', '');
+            .get("*", (req, _, next) => {
+                const ip = req.header("x-forwarded-for") || req.socket.remoteAddress?.replace("::ffff:", "");
 
-                if (!req.originalUrl.includes('api')) console.log(`[${(new Date()).toLocaleString("en-GB")}] ${ip} - ${req.originalUrl}`);
+                if (!req.originalUrl.includes("api")) console.log(`[${(new Date()).toLocaleString("en-GB")}] ${ip} - ${req.originalUrl}`);
 
                 next();
             })
-            .get('/', (_, res) => res.render('serverlist.pug', {
+            .get("/", (_, res) => res.render("serverlist.pug", {
                 dss: { server: { name: "Home" } },
                 year: new Date().getFullYear(),
                 keys: this._app.serverLabels
@@ -28,7 +28,7 @@ export default class IndexRouter {
 
             const dssRes = await fetch(
                 serverObj.url + Feeds.dedicatedServerStats(serverObj.code, DSSExtension.JSON),
-                { headers: { 'User-Agent': `${this._app.userAgentString}DSS` } }
+                { headers: { "User-Agent": `${this._app.userAgentString}DSS` } }
             );
             const dss: DSSResponse = await dssRes.json();
 
@@ -47,11 +47,11 @@ export default class IndexRouter {
 
             const csgRes = await fetch(
                 serverObj.url + Feeds.dedicatedServerSavegame(serverObj.code, DSSFile.CareerSavegame),
-                { headers: { 'User-Agent': `${this._app.userAgentString}CSG` } }
+                { headers: { "User-Agent": `${this._app.userAgentString}CSG` } }
             );
             const csg = getSavegameData(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
 
-            res.render('home.pug', {
+            res.render("home.pug", {
                 dss: {
                     server: dss.server,
                     slots: dss.slots,

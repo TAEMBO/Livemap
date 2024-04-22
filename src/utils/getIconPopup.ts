@@ -13,14 +13,14 @@ export function getIconPopup(vehicle: Vehicle) {
             popupHTML += "<br>Empty";
         } else { // Valid & relevant fill data
             popupHTML += fillData.map(fill => {
-                return `<br><span style="text-transform: capitalize;">${fill.type.toLowerCase()}</span> (${fill.level.toLocaleString('en-US')})`;
+                return `<br><span style="text-transform: capitalize;">${fill.type.toLowerCase()}</span> (${fill.level.toLocaleString("en-US")})`;
             }).join("");
         }
     }
 
     if (vehicle.controller) popupHTML += `<br>Player: ${vehicle.controller}`;
 
-    popupHTML += '</small>';
+    popupHTML += "</small>";
 
     return popupHTML;
 }
