@@ -69,6 +69,7 @@ export interface Config {
 }
 
 export interface BaseLocalOptions extends Record<string, any>{
+    dss: { server: { name: string } } & Record<string, any>;
     year: number;
     keys: {
         key: string;

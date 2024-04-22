@@ -6,7 +6,7 @@ import IndexRouter from './routes/index.js';
 import APIRouter from './routes/api.js';
 import config from './config.json' assert { type: "json" };
 import createError, { HttpError } from 'http-errors';
-import { Config } from './typings.js';
+import { BaseLocalOptions, Config } from './typings.js';
 
 export default new class App {
     readonly server = express();
@@ -43,7 +43,7 @@ export default new class App {
                     year: new Date().getFullYear(),
                     keys: this.serverLabels,
                     error: err
-                });
+                } satisfies BaseLocalOptions);
             })
             .listen(this.config.port, () => console.log(`[${(new Date()).toLocaleString("en-GB")}] Livemap live on port`, this.config.port));
 
