@@ -1,24 +1,19 @@
 {
-    "compilerOptions": {
-        "target": "ES2021",
-        "baseUrl": ".",
-        "module": "NodeNext",
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "strictNullChecks": true,
-        "strictFunctionTypes": true,
-        "strictPropertyInitialization": true,
-        "skipLibCheck": true,
-        "moduleResolution": "NodeNext",
-        "resolveJsonModule": true,
-        "allowSyntheticDefaultImports": true,
-        "esModuleInterop": true,
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "noImplicitAny": true,
         "noImplicitThis": true,
-        "removeComments": true,
-        "outDir": "dist",
-    },
-    "include": ["src"]
+		"moduleResolution": "bundler"
+	},
+    "exclude": ["build", "node_modules", "static", ".svelte-kit"]
 }

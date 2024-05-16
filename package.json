@@ -1,33 +1,48 @@
 {
-  "name": "livemap",
-  "version": "0.0.0",
-  "description": "Web-based map view for Farming Simulator MP servers.",
-  "private": true,
-  "type": "module",
-  "main": "./dist/app.js",
-  "author": "TAEMBO",
-  "scripts": {
-    "lint": "eslint ./src",
-    "build": "npm run lint && tsc"
-  },
-  "dependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.7.0",
-    "@typescript-eslint/parser": "^7.7.0",
-    "consolidate": "^1.0.3",
-    "cookie-parser": "^1.4.6",
-    "express": "^4.19.2",
-    "farming-simulator-types": "^1.6.0",
-    "http-errors": "^2.0.0",
-    "pug": "^3.0.2",
-    "xml-js": "^1.6.11"
-  },
-  "devDependencies": {
-    "@types/consolidate": "^0.14.4",
-    "@types/cookie-parser": "^1.4.7",
-    "@types/express": "^4.17.21",
-    "@types/http-errors": "^2.0.4",
-    "@types/node": "20.2.5",
-    "eslint": "^8.56.0",
-    "typescript": "^5.4.5"
-  }
+	"name": "livemap",
+	"version": "0.0.0",
+	"description": "Web-based Farming Simulator server map",
+	"private": true,
+	"type": "module",
+	"main": "./build/index.js",
+	"author": "TAEMBO",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "npm run build:tsc && npm run lint",
+		"build:tsc": "vite build",
+		"preview": "vite preview",
+		"start": "node -r dotenv/config .",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"lint": "eslint ./src"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.5",
+		"farming-simulator-types": "^1.6.0",
+		"xml-js": "^1.6.11"
+	},
+	"devDependencies": {
+		"@eslint/js": "^8.57.0",
+		"@sveltejs/adapter-auto": "^3.0.0",
+		"@sveltejs/adapter-node": "^5.0.1",
+		"@sveltejs/kit": "^2.0.0",
+		"@sveltejs/vite-plugin-svelte": "^3.0.0",
+		"@types/eslint": "^8.56.0",
+		"@typescript-eslint/eslint-plugin": "^7.2.0",
+		"@typescript-eslint/parser": "^7.2.0",
+		"eslint": "^8.57.0",
+		"eslint-plugin-svelte": "^2.35.1",
+		"globals": "^15.2.0",
+		"svelte": "^4.2.7",
+		"svelte-check": "^3.6.0",
+		"svelte-eslint-parser": "^0.36.0",
+		"tslib": "^2.4.1",
+		"typescript": "^5.0.0",
+		"vite": "^5.0.3"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/TAEMBO/Livemap.git"
+	},
+	"homepage": "https://taembo.net"
 }

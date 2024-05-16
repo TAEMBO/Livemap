@@ -1,5 +1,24 @@
+import type { PlayerUsed, Server, Slots } from "farming-simulator-types/2022";
+import type { getSavegameData } from "$lib";
+
+export interface RouteDataServersDynamicServerAcro {
+    dss: {
+        server: Server;
+        slots: Slots;
+        players: (Omit<PlayerUsed, "uptime"> & { uptime: string })[];
+    }
+    csg: ReturnType<typeof getSavegameData>;
+    isNewServer: boolean;
+}
+
+export type ListsHelperSettings = RouteDataServersDynamicServerAcro["csg"];
+
+export type ListsPlayerSlots = RouteDataServersDynamicServerAcro["dss"];
+
+export type ListsServerDetails = RouteDataServersDynamicServerAcro;
+
 export interface FSCSG {
-    readonly careerSavegame: {
+    readonly careerSavegame?: {
         readonly settings: {
             readonly savegameName: { readonly _text: string; };
             readonly creationDate: { readonly _text: string; },
@@ -13,20 +32,20 @@ export interface FSCSG {
             readonly trailerFillLimit: { readonly _text: "true" | "false"; };
             readonly automaticMotorStartEnabled: { readonly _text: "true" | "false"; };
             readonly growthMode: { readonly _text: "1" | "2" | "3"; };
-            readonly fixedSeasonalVisuals: { readonly _text: string; };
+            readonly fixedSeasonalVisuals?: { readonly _text: string; };
             readonly plannedDaysPerPeriod: { readonly _text: string; };
-            readonly fruitDestruction: { readonly _text: "true" | "fase"; };
-            readonly plowingRequiredEnabled: { readonly _text: "true" | "fase"; };
+            readonly fruitDestruction: { readonly _text: "true" | "false"; };
+            readonly plowingRequiredEnabled: { readonly _text: "true" | "false"; };
             readonly stonesEnabled: { readonly _text: "true" | "false"; };
             readonly weedsEnabled: { readonly _text: "true" | "false"; };
             readonly limeRequired: { readonly _text: "true" | "false"; };
             readonly isSnowEnabled: { readonly _text: "true" | "false"; };
-            readonly fuelUsage: { readonly _text: string; };
+            readonly fuelUsage: { readonly _text: "1" | "2" | "3"; };
             readonly helperBuyFuel: { readonly _text: "true" | "false"; };
             readonly helperBuySeeds: { readonly _text: "true" | "false"; };
             readonly helperBuyFertilizer: { readonly _text: "true" | "false"; };
-            readonly helperSlurrySource: { readonly _text: string; };
-            readonly helperManureSource: { readonly _text: string; };
+            readonly helperSlurrySource: { readonly _text: "1" | "2"; };
+            readonly helperManureSource: { readonly _text: "1" | "2"; };
             readonly densityMapRevision: { readonly _text: string; };
             readonly terrainTextureRevision: { readonly _text: string; };
             readonly terrainLodTextureRevision: { readonly _text: string; };
@@ -41,9 +60,9 @@ export interface FSCSG {
             readonly mapTipCollisionRevision: { readonly _text: string; };
             readonly mapPlacementCollisionRevision: { readonly _text: string; };
             readonly mapNavigationCollisionRevision: { readonly _text: string; };
-            readonly difficulty: { readonly _text: string; };
-            readonly economicDifficulty: { readonly _text: string; };
-            readonly dirtInterval: { readonly _text: string; };
+            readonly difficulty: { readonly _text: "1" | "2" | "3"; };
+            readonly economicDifficulty: { readonly _text: "1" | "2" | "3"; };
+            readonly dirtInterval: { readonly _text: "1" | "2" | "3" | "4"; };
             readonly timeScale: { readonly _text: string; };
             readonly autoSaveInterval: { readonly _text: string; };
         };
@@ -59,20 +78,17 @@ export interface FSCSG {
     }
 }
 
-export interface Config {
-    readonly port: number;
-    readonly servers: Record<string, {
-        readonly name: string;
-        readonly url: string;
-        readonly code: string;
-    }>;
-}
-
-export interface BaseLocalOptions extends Record<string, any>{
-    dss: { server: { name: string } } & Record<string, any>;
-    year: number;
-    keys: {
-        key: string;
-        name: string;
-    }[];
+export interface CachedVehicle {
+    name: string;
+    posx: number;
+    posy: number;
+    type: string;
+    category: string;
+    controller?: string;
+    icon: {
+        icon: string;
+        desc: string;
+        dimension: number;
+    };
+    popup: string;
 }
