@@ -2,6 +2,7 @@
     import Footer from "../../../components/Footer.svelte";
     import Header from "../../../components/Header.svelte";
     import LeafletMap from "../../../components/LeafletMap.svelte";
+    import ListColumn from "../../../components/ListColumn.svelte";
     import Main from "../../../components/Main.svelte";
     import NewServerBanner from "../../../components/NewServerBanner.svelte";
     import PlayerSlotsList from "../../../lists/PlayerSlotsList.svelte";
@@ -22,10 +23,14 @@
     {#if data.csg.isNewServer}
         <NewServerBanner />
     {/if}
-    <CurrentServersList />
-    <PlayerSlotsList data={data.dss} />
+    <ListColumn>
+        <CurrentServersList />
+        <PlayerSlotsList data={data.dss} />
+    </ListColumn>
     <LeafletMap />
-    <ServerDetailsList {data} />
-    <HelperSettingsList data={data.csg} />
+    <ListColumn>
+        <ServerDetailsList {data} />
+        <HelperSettingsList data={data.csg} />
+    </ListColumn>
 </Main>
 <Footer />

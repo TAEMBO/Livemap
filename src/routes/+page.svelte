@@ -1,6 +1,7 @@
 <script lang="ts">
     import Header from "../components/Header.svelte";
     import Footer from "../components/Footer.svelte";
+    import ListColumn from "../components/ListColumn.svelte";
     import Main from "../components/Main.svelte";
     import CurrentServersList from "../lists/CurrentServersList.svelte";
 </script>
@@ -11,6 +12,8 @@
 
 <Header name="Home" />
 <Main>
-     <CurrentServersList />
+    <ListColumn>
+        <CurrentServersList />
+    </ListColumn>
 </Main>
 <Footer />

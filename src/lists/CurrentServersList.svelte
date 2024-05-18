@@ -4,7 +4,7 @@
     import ListItem from "../components/ListItem.svelte";
 </script>
 
-<List title="Current Servers" column="col-xl-2">
+<List title="Current Servers">
     {#each serverHrefs as server}
         <ListItem><a href={server.href}>{server.name}</a></ListItem>
     {/each}
