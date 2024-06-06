@@ -43,7 +43,7 @@ function toggleDarkMode() {
     }
 }
 
-$(document).ready(() => {
+document.addEventListener('DOMContentLoaded', () => {
     if (localStorage.getItem('isDark')) {
         document.body.classList.toggle('dark-mode');
         queryAllSet('.card', '.list-group', '.list-group-item > a');
@@ -63,25 +63,21 @@ $(document).ready(() => {
 
     map.on('drag', () => map.panInsideBounds([[-749, -749], [749, 749]], { animate: false }));
 
-    $.ajax({
-        type: "GET",
-        url: `/api/geojson/${serverAcro}`,
-        dataType: "json",
-        success: (geojson) => {
-            new L.GeoJSON(geojson, {
-                onEachFeature: (_, layer) => {
-                    if (!(layer instanceof L.Marker)) return;
 
-                    layer.bindPopup(layer.feature.properties.popup);
+    fetch(`/api/geojson/${serverAcro}`).then(x => x.json()).then(data => {
+        new L.GeoJSON(data, {
+            onEachFeature: (_, layer) => {
+                if (!(layer instanceof L.Marker)) return;
 
-                    layer.setIcon(L.icon({
-                        iconUrl: '/icons/' + layer.feature.properties.icon.icon,
-                        iconSize: [layer.feature.properties.icon.dimension, layer.feature.properties.icon.dimension],
-                        iconAnchor: [(layer.feature.properties.icon.dimension / 2), (layer.feature.properties.icon.dimension / 2)],
-                        popupAnchor: [0, -10]
-                    }));
-                }
-            }).addTo(map);
-        }
+                layer.bindPopup(layer.feature.properties.popup);
+
+                layer.setIcon(L.icon({
+                    iconUrl: '/icons/' + layer.feature.properties.icon.icon,
+                    iconSize: [layer.feature.properties.icon.dimension, layer.feature.properties.icon.dimension],
+                    iconAnchor: [(layer.feature.properties.icon.dimension / 2), (layer.feature.properties.icon.dimension / 2)],
+                    popupAnchor: [0, -10]
+                }));
+            }
+        }).addTo(map);
     });
-});
+}, false);
