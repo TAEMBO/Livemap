@@ -11,13 +11,12 @@
 		"build": "npm run check && npm run build:tsc && npm run lint",
 		"build:tsc": "vite build",
 		"preview": "vite preview",
-		"start": "node -r dotenv/config .",
+		"start": "node --env-file=.env .",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "eslint ./src"
 	},
 	"dependencies": {
-		"dotenv": "^16.4.5",
 		"farming-simulator-types": "^1.6.0",
 		"xml-js": "^1.6.11"
 	},
