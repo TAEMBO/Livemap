@@ -8,7 +8,7 @@
 	"author": "TAEMBO",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "npm run check && npm run build:tsc && npm run lint",
+		"build": "pnpm check && pnpm build:tsc && pnpm lint",
 		"build:tsc": "vite build",
 		"preview": "vite preview",
 		"start": "node --env-file=.env .",
@@ -45,5 +45,6 @@
 		"type": "git",
 		"url": "https://github.com/TAEMBO/Livemap.git"
 	},
-	"homepage": "https://taembo.net"
+	"homepage": "https://taembo.net",
+	"packageManager": "pnpm@9.12.2+sha256.2ef6e547b0b07d841d605240dce4d635677831148cd30f6d564b8f4f928f73d2"
 }
