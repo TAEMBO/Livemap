@@ -6,8 +6,26 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+.list-group-anchor {
+    color: #000;
+}
+
 .dark-mode {
     background-color: #090909;
+}
+
+.dark-mode-card {
+    background-color: #090909;
+}
+
+.dark-mode-list-group {
+    --bs-list-group-color: #fff;
+    --bs-list-group-bg: #171717;
+    --bs-list-group-border-color: rgba(255, 255, 255, 0.13);
+}
+
+.dark-mode-list-group-anchor {
+    color: #06860a;
 }
 
 a {

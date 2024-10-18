@@ -1,5 +1,14 @@
 <script lang="ts">
+    import { onMount } from "svelte";
+    import { setTheme } from "$lib";
+
     export let name: string;
+
+    function toggleTheme() {
+        setTheme(localStorage.getItem("theme") === "dark" ? "light" : "dark");
+    }
+
+    onMount(() => setTheme(localStorage.getItem("theme") === "dark" ? "dark" : "light"));
 </script>
 
 <header>
@@ -14,8 +23,11 @@
                     <a class="button" href="/"> Home </a>
                 </li>
                 <li>
-                    <!-- svelte-ignore a11y-invalid-attribute -->
-                    <a class="button" type="button" href="javascript:toggleDarkMode()"> Toggle theme </a>
+                    <!-- svelte-ignore a11y-missing-attribute -->
+                    <!-- svelte-ignore a11y-click-events-have-key-events -->
+                    <a class="button" type="button" role="button" tabindex={0} on:click={toggleTheme}>
+                        Toggle theme
+                    </a>
                 </li>
             </ul>
         </div>

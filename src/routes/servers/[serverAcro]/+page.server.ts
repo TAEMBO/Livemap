@@ -4,8 +4,6 @@ import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "fa
 import type { FSCSG, RouteDataServersDynamicServerAcro } from "../../../typings";
 import { xml2js } from "xml-js";
 
-export const csr = false;
-
 export async function load({ fetch, params: { serverAcro } }) {
     const serverObj = secrets[serverAcro];
 
@@ -43,6 +41,7 @@ export async function load({ fetch, params: { serverAcro } }) {
             players: filterUnused(dss.slots.players).map(x => ({ ...x, uptime: formatTime(x.uptime) })),
         },
         csg,
-        isNewServer: csg.isNewServer
+        isNewServer: csg.isNewServer,
+        serverAcro
     } satisfies RouteDataServersDynamicServerAcro;
 }

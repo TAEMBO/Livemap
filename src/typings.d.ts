@@ -9,6 +9,7 @@ export interface RouteDataServersDynamicServerAcro {
     }
     csg: ReturnType<typeof getSavegameData>;
     isNewServer: boolean;
+    serverAcro: string;
 }
 
 export type ListsHelperSettings = RouteDataServersDynamicServerAcro["csg"];

@@ -27,7 +27,9 @@
         <CurrentServersList />
         <PlayerSlotsList data={data.dss} />
     </ListColumn>
-    <LeafletMap />
+    {#key data.serverAcro}
+        <LeafletMap serverAcro={data.serverAcro} />
+    {/key}
     <ListColumn>
         <ServerDetailsList {data} />
         <HelperSettingsList data={data.csg} />

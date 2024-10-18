@@ -10,4 +10,3 @@ export const secrets: Record<string, { name: string; url: string; code: string; 
 export const serverHrefs = Object.entries(secrets).map(([key, { name }]) => ({ href: "/servers/" + key, name }));
 
 export const cachedVehicles = Object.fromEntries(Object.keys(secrets).map(x => ([x, [] as CachedVehicle[]])));
-

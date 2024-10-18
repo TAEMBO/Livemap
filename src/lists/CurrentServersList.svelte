@@ -6,6 +6,6 @@
 
 <List title="Current Servers">
     {#each serverHrefs as server}
-        <ListItem><a href={server.href}>{server.name}</a></ListItem>
+        <ListItem><a class="list-group-anchor" href={server.href}>{server.name}</a></ListItem>
     {/each}
 </List>
