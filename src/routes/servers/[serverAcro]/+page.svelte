@@ -15,10 +15,10 @@
 </script>
 
 <svelte:head>
-    <title>{data.dss.server.name} | IRT Livemap</title>
+    <title>{data.dss.server.name || "Server Offline"} | IRT Livemap</title>
 </svelte:head>
 
-<Header name={data.dss.server.name} />
+<Header name={data.dss.server.name || "Server Offline"} />
 <Main>
     {#if data.csg.isNewServer}
         <NewServerBanner />
