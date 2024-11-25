@@ -1,5 +1,14 @@
 import { error } from "@sveltejs/kit";
-import { USER_AGENT_PREFIX, getIcon, getIconPopup, secrets, cachedVehicles, formatTime, getSavegameData } from "$lib";
+import {
+    USER_AGENT_PREFIX,
+    getIcon,
+    getIconPopup,
+    secrets,
+    cachedVehicles,
+    formatTime,
+    getSavegameData,
+    MAP_SIZE
+} from "$lib";
 import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "farming-simulator-types/2022";
 import type { FSCSG, RouteDataServersDynamicServerAcro } from "../../../typings";
 import { xml2js } from "xml-js";
@@ -19,8 +28,8 @@ export async function load({ fetch, params: { serverAcro } }) {
 
     cachedVehicles[serverAcro] = dss.vehicles.map(vehicle => ({
         name: vehicle.name,
-        posx: (vehicle.x / (dss.server.mapSize / 2)) * 375,
-        posy: ((vehicle.z / (dss.server.mapSize / 2)) * 375) * -1,
+        posx: (vehicle.x / (dss.server.mapSize / 2)) * (MAP_SIZE / 2),
+        posy: ((vehicle.z / (dss.server.mapSize / 2)) * (MAP_SIZE / 2)) * -1,
         type: vehicle.type,
         category: vehicle.category,
         controller: vehicle.controller,

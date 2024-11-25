@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Footer from "../../../components/Footer.svelte";
     import Header from "../../../components/Header.svelte";
     import LeafletMap from "../../../components/LeafletMap.svelte";
     import ListColumn from "../../../components/ListColumn.svelte";
@@ -35,4 +34,3 @@
         <HelperSettingsList data={data.csg} />
     </ListColumn>
 </Main>
-<Footer />

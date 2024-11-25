@@ -109,10 +109,6 @@ main > .container {
     margin-left: 5mm;
 }
 
-#map {
-    height: 750px;
-    width: 750px;
-}
 /*.leaflet-marker-icon { filter: drop-shadow(0 2px 1px #444); }*/
 
 .dropdown-menu {

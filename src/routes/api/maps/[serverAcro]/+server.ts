@@ -7,7 +7,7 @@ export async function GET(requestEvent) {
 
     if (!serverObj) return new Response(undefined, { status: 404 });
 
-    const arrayBuffer = await fetch(serverObj.url + Feeds.dedicatedServerStatsMap(serverObj.code, 120, 2048)).then(x => x.arrayBuffer());
+    const res = await fetch(serverObj.url + Feeds.dedicatedServerStatsMap(serverObj.code, 120, 2048));
 
-    return new Response(arrayBuffer, { status: 200 });
+    return new Response(await res.arrayBuffer(), { status: 200 });
 }
