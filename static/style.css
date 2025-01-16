@@ -115,3 +115,11 @@ main > .container {
     font-size: 14px !important;
     min-width: auto;
 }
+
+@media screen and (max-width: 850px) {
+    .leaflet-container {
+        width: 99% !important;
+        height: 99% !important;
+        aspect-ratio: 1 / 1 !important;
+    }
+}
