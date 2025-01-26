@@ -4,7 +4,6 @@ import {
     getIcon,
     getIconPopup,
     secrets,
-    cachedVehicles,
     formatTime,
     getSavegameData,
     MAP_SIZE
@@ -26,7 +25,7 @@ export async function load({ fetch, params: { serverAcro } }) {
 
     if (!dss.slots) return error(500, "Insufficient DSS data");
 
-    cachedVehicles[serverAcro] = dss.vehicles.map(vehicle => ({
+    const vehicles = dss.vehicles.map(vehicle => ({
         name: vehicle.name,
         posx: (vehicle.x / (dss.server.mapSize / 2)) * (MAP_SIZE / 2),
         posy: ((vehicle.z / (dss.server.mapSize / 2)) * (MAP_SIZE / 2)) * -1,
@@ -36,7 +35,6 @@ export async function load({ fetch, params: { serverAcro } }) {
         icon: getIcon(vehicle),
         popup: getIconPopup(vehicle)
     }));
-
     const csgRes = await fetch(
         serverObj.url + Feeds.dedicatedServerSavegame(serverObj.code, DSSFile.CareerSavegame),
         { headers: { "User-Agent": `${USER_AGENT_PREFIX}CSG` } }
@@ -51,6 +49,7 @@ export async function load({ fetch, params: { serverAcro } }) {
         },
         csg,
         isNewServer: csg.isNewServer,
+        vehicles,
         serverAcro
     } satisfies RouteDataServersDynamicServerAcro;
 }

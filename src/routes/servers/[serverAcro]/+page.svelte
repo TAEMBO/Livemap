@@ -27,7 +27,7 @@
         <PlayerSlotsList data={data.dss} />
     </ListColumn>
     {#key data.serverAcro}
-        <LeafletMap serverAcro={data.serverAcro} />
+        <LeafletMap serverAcro={data.serverAcro} vehicles={data.vehicles} />
     {/key}
     <ListColumn>
         <ServerDetailsList {data} />

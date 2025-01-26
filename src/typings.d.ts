@@ -9,6 +9,7 @@ export interface RouteDataServersDynamicServerAcro {
     }
     csg: ReturnType<typeof getSavegameData>;
     isNewServer: boolean;
+    vehicles: LeafletVehicle[];
     serverAcro: string;
 }
 
@@ -79,7 +80,7 @@ export interface FSCSG {
     }
 }
 
-export interface CachedVehicle {
+export interface LeafletVehicle {
     name: string;
     posx: number;
     posy: number;

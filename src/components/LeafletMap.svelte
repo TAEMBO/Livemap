@@ -1,13 +1,25 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { MAP_SIZE } from "$lib";
+    import type { LeafletVehicle } from "../typings";
 
+    export let vehicles: LeafletVehicle[];
     export let serverAcro: string;
 
     onMount(async () => {
         //eslint-disable-next-line @typescript-eslint/naming-convention
         const { CRS, GeoJSON, icon, imageOverlay, map, Marker } = await import("leaflet");
-        const data = await fetch(`/api/geojson/${serverAcro}`).then(x => x.json());
+        const data = {
+            type: "FeatureCollection",
+            features: vehicles.map(vehicle => ({
+                type: "Feature",
+                geometry: {
+                    type: "Point",
+                    coordinates: [vehicle.posx, vehicle.posy]
+                },
+                properties: vehicle
+            }))
+        } as const;
         const leafletMap = map("map", { crs: CRS.Simple, maxZoom: 5 });
         const bounds: [number, number][] = [[-MAP_SIZE, -MAP_SIZE], [MAP_SIZE, MAP_SIZE]];
 
