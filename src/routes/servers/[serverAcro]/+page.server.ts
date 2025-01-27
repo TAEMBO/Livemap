@@ -12,8 +12,10 @@ import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "fa
 import type { FSCSG, RouteDataServersDynamicServerAcro } from "../../../typings";
 import { xml2js } from "xml-js";
 
-export async function load({ fetch, params: { serverAcro } }) {
+export async function load({ fetch, params: { serverAcro }, request: { headers } }) {
     const serverObj = secrets[serverAcro];
+
+    console.log(`[${(new Date()).toLocaleString("en-GB")}] ${headers.get("x-forwarded-for")} - ${serverAcro}`);
 
     if (!serverObj) return error(404, `Unknown server key "/servers/${serverAcro}"`);
 
