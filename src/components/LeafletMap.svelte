@@ -61,7 +61,6 @@
 <div class="col-xl-auto">
     <div
         id="map"
-        style="height: {MAP_SIZE}px; width: {MAP_SIZE}px;"
         class="leaflet-container leaflet-touch leaflet-retina leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom"
         tabIndex={0}
     />
