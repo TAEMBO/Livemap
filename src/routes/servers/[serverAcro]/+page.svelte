@@ -9,8 +9,11 @@
     import ServerDetailsList from "../../../lists/ServerDetailsList.svelte";
     import CurrentServersList from "../../../lists/CurrentServersList.svelte";
     import type { RouteDataServersDynamicServerAcro } from "../../../typings";
+    import type { Marker } from "leaflet";
 
     export let data: RouteDataServersDynamicServerAcro;
+    
+    let popupPairs = new Map<string, Marker>();
 </script>
 
 <svelte:head>
@@ -24,10 +27,10 @@
     {/if}
     <ListColumn>
         <CurrentServersList />
-        <PlayerSlotsList data={data.dss} />
+        <PlayerSlotsList data={data.dss} bind:popupPairs={popupPairs} />
     </ListColumn>
     {#key data.serverAcro}
-        <LeafletMap serverAcro={data.serverAcro} vehicles={data.vehicles} />
+        <LeafletMap serverAcro={data.serverAcro} vehicles={data.vehicles} bind:popupPairs={popupPairs} />
     {/key}
     <ListColumn>
         <ServerDetailsList {data} />

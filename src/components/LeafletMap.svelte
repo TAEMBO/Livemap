@@ -2,9 +2,11 @@
     import { onMount } from "svelte";
     import { MAP_SIZE } from "$lib";
     import type { LeafletVehicle } from "../typings";
+    import type { Marker } from "leaflet";
 
     export let vehicles: LeafletVehicle[];
     export let serverAcro: string;
+    export let popupPairs: Map<string, Marker>;
 
     onMount(async () => {
         //eslint-disable-next-line @typescript-eslint/naming-convention
@@ -33,13 +35,16 @@
                 [MAP_SIZE - 1, MAP_SIZE - 1]
             ], { animate: false }));
 
+        // Clear previous popups from page navigating and trigger component reconstruction
+        popupPairs = new Map<string, Marker>();
+
         new GeoJSON(data, {
             onEachFeature(_, layer) {
                 if (!(layer instanceof Marker)) return;
 
-                const { properties } = layer.feature!;
-
-                layer
+                const { properties } = layer.feature! as { properties: LeafletVehicle; };
+                
+                const marker = layer
                     .bindPopup(properties.popup)
                     .setIcon(icon({
                         iconUrl: "/icons/" + properties.icon.icon,
@@ -47,6 +52,8 @@
                         iconAnchor: [properties.icon.dimension / 2, properties.icon.dimension / 2],
                         popupAnchor: [0, -10],
                     }));
+
+                if (properties.controller) popupPairs.set(properties.controller, marker);
             },
         }).addTo(leafletMap);
 
