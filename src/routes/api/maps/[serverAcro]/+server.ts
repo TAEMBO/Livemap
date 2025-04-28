@@ -1,5 +1,5 @@
 import { secrets } from "$lib";
-import { Feeds } from "farming-simulator-types/2022";
+import { Feeds } from "farming-simulator-types/2025";
 
 export async function GET(requestEvent) {
     const { params: { serverAcro } } = requestEvent;

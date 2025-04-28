@@ -7,22 +7,21 @@
 </script>
 
 <List title="Server Details">
-    <ListItem><b>Money</b><span class="float-end">{data.csg.money}</span></ListItem>
-    <ListItem><b>Game Difficulty</b><span class="float-end">{data.csg.difficulty}</span></ListItem>
-    <ListItem><b>Console Slots</b><span class="float-end">{data.csg.slotUsage}</span></ListItem>
-    <ListItem><b>Savegame Name</b><span class="float-end">{data.csg.savegameName}</span></ListItem>
-    <ListItem><b>Creation Date</b><span class="float-end">{data.csg.creationDate}</span></ListItem>
-    <ListItem><b>Map</b><span class="float-end">{data.csg.mapTitle}</span></ListItem>
-    <ListItem><b>Map size</b><span class="float-end">{data.dss.server.mapSize}</span></ListItem>
-    <ListItem><b>Game Version</b><span class="float-end">{data.dss.server.version}</span></ListItem>
-    <ListItem><b>Timescale</b><span class="float-end">{data.csg.timeScale}</span></ListItem>
-    <ListItem><b>Autosave Interval</b><span class="float-end">{data.csg.saveInterval}</span></ListItem>
-    <ListItem><b>Economy Difficulty</b><span class="float-end">{data.csg.economicDifficulty}</span></ListItem>
-    <ListItem><b>Fixed Visual Month</b><span class="float-end">{data.csg.fixedSeasonalVisuals}</span></ListItem>
-    <ListItem><b>Growth Mode</b><span class="float-end">{data.csg.growthMode}</span></ListItem>
-    <ListItem><b>Fuel Usage</b><span class="float-end">{data.csg.fuelUsage}</span></ListItem>
-    <ListItem><b>Dirt Setting</b><span class="float-end">{data.csg.dirtInterval}</span></ListItem>
-    <ListItem><b>Plowing Required</b><span class="float-end">{data.csg.plowingRequiredEnabled}</span></ListItem>
-    <ListItem><b>Automatic Motor Start</b><span class="float-end">{data.csg.automaticMotorStartEnabled}</span></ListItem>
-    <ListItem><b>Crop Destruction</b><span class="float-end">{data.csg.fruitDestruction}</span></ListItem>
+    <ListItem name="Money" value={data.csg.money} />
+    <ListItem name="Console Slots" value={data.csg.slotUsage} />
+    <ListItem name="Savegame Name" value={data.csg.savegameName} />
+    <ListItem name="Creation Date" value={data.csg.creationDate} />
+    <ListItem name="Map Name" value={data.csg.mapTitle} />
+    <ListItem name="Map Size" value={data.dss.server.mapSize.toString()} />
+    <ListItem name="Game Version" value={data.dss.server.version} />
+    <ListItem name="Timescale" value={data.csg.timeScale} />
+    <ListItem name="Autosave Interval" value={data.csg.saveInterval} />
+    <ListItem name="Economy Difficulty" value={data.csg.economicDifficulty} />
+    <ListItem name="Fixed Visual Month" value={data.csg.fixedSeasonalVisuals} />
+    <ListItem name="Growth Mode" value={data.csg.growthMode} />
+    <ListItem name="Fuel Usage" value={data.csg.fuelUsage} />
+    <ListItem name="Dirt Setting" value={data.csg.dirtInterval} />
+    <ListItem name="Plowing Required" value={data.csg.plowingRequiredEnabled} />
+    <ListItem name="Automatic Motor Start" value={data.csg.automaticMotorStartEnabled} />
+    <ListItem name="Crop Destruction" value={data.csg.fruitDestruction} />
 </List>

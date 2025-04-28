@@ -8,7 +8,7 @@ import {
     getSavegameData,
     MAP_SIZE
 } from "$lib";
-import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "farming-simulator-types/2022";
+import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "farming-simulator-types/2025";
 import type { FSCSG, RouteDataServersDynamicServerAcro } from "../../../typings";
 import { xml2js } from "xml-js";
 

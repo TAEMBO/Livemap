@@ -1,4 +1,4 @@
-import type { Vehicle } from "farming-simulator-types/2022";
+import type { Vehicle } from "farming-simulator-types/2025";
 import { icons } from "./icons";
 
 export function getIcon(object: Vehicle) {

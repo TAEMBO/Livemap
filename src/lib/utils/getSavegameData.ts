@@ -1,3 +1,4 @@
+import { formatString } from "./formatString";
 import type { FSCSG } from "../../typings";
 
 type SavegameKeys = NonNullable<FSCSG["careerSavegame"]>["settings"];
@@ -11,21 +12,10 @@ export function getSavegameData(game: FSCSG) {
     return {
         isNewServer: !game.careerSavegame,
         money: formatNumber(+(game.careerSavegame?.statistics.money._text ?? 0), " $"),
-        difficulty: ({
-            "1": "New Farmer",
-            "2": "Farm-Manager",
-            "3": "Start from scratch",
-            "0": "Unknown"
-        })[setting("difficulty") ?? "0"],
         mapTitle: setting("mapTitle") ?? "Unknown",
         timeScale: formatNumber(+(setting("timeScale") ?? 0), "x"),
-        saveInterval: formatNumber(+(setting("autoSaveInterval") ?? 0), " mins"),
-        economicDifficulty: ({
-            "1": "Easy",
-            "2": "Normal",
-            "3": "Hard",
-            "0": "Unknown"
-        })[setting("economicDifficulty") ?? "0"],
+        saveInterval: formatNumber(+(setting("autoSaveInterval") ?? 0), " min"),
+        economicDifficulty: formatString(setting("economicDifficulty") ?? "Unknown"),
         fixedSeasonalVisuals: ({
             "1": "March",
             "2": "April",
@@ -40,7 +30,7 @@ export function getSavegameData(game: FSCSG) {
             "11": "January",
             "12": "February",
             "0": "Off"
-        })[setting("fixedSeasonalVisuals") ?? "0"],
+        })[setting("fixedSeasonalVisuals") ?? "0"] ?? "Off",
         growthMode: ({
             "1": "Yes",
             "2": "No",

@@ -1,4 +1,4 @@
-import type { Vehicle } from "farming-simulator-types/2022";
+import type { Vehicle } from "farming-simulator-types/2025";
 
 export function getIconPopup(vehicle: Vehicle) {
     let popupHTML = `<b>${vehicle.name}</b><small>`;

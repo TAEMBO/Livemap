@@ -1,4 +1,4 @@
-import type { PlayerUsed, Server, Slots } from "farming-simulator-types/2022";
+import type { PlayerUsed, Server, Slots } from "farming-simulator-types/2025";
 import type { getSavegameData } from "$lib";
 
 export interface RouteDataServersDynamicServerAcro {
@@ -23,12 +23,17 @@ export interface FSCSG {
     readonly careerSavegame?: {
         readonly settings: {
             readonly savegameName: { readonly _text: string; };
-            readonly creationDate: { readonly _text: string; },
+            readonly creationDate: { readonly _text: string; };
             readonly mapId: { readonly _text: string; };
             readonly mapTitle: { readonly _text: string; };
             readonly saveDateFormatted: { readonly _text: string; };
             readonly saveDate: { readonly _text: string; };
-            readonly resetVehicles: { readonly _text: "true" | "false"; };
+            readonly initialMoney: { readonly _text: string; };
+            readonly initialLoan: { readonly _text: string; };
+            readonly economicDifficulty: { readonly _text: "EASY" | "NORMAL" | "HARD"; };
+            readonly hasInitiallyOwnedFarmlands: { readonly _text: "true" | "false"; };
+            readonly loadDefaultFarm: { readonly _text: "true" | "false"; };
+            readonly startWithGuidedTour: { readonly _text: "true" | "false"; };
             readonly trafficEnabled: { readonly _text: "true" | "false"; };
             readonly stopAndGoBraking: { readonly _text: "true" | "false"; };
             readonly trailerFillLimit: { readonly _text: "true" | "false"; };
@@ -62,8 +67,7 @@ export interface FSCSG {
             readonly mapTipCollisionRevision: { readonly _text: string; };
             readonly mapPlacementCollisionRevision: { readonly _text: string; };
             readonly mapNavigationCollisionRevision: { readonly _text: string; };
-            readonly difficulty: { readonly _text: "1" | "2" | "3"; };
-            readonly economicDifficulty: { readonly _text: "1" | "2" | "3"; };
+            readonly disasterDestructionState: { readonly _text: "DISABLED" | "VISUALS_ONLY" | "ENABLED"; };
             readonly dirtInterval: { readonly _text: "1" | "2" | "3" | "4"; };
             readonly timeScale: { readonly _text: string; };
             readonly autoSaveInterval: { readonly _text: string; };

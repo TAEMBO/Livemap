@@ -1,3 +1,4 @@
+export * from "./formatString";
 export * from "./formatTime";
 export * from "./getIcon";
 export * from "./getIconPopup";
