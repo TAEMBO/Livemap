@@ -1,6 +1,7 @@
 import { error } from "@sveltejs/kit";
+import { constants } from "http2";
 import {
-    USER_AGENT_PREFIX,
+    USER_AGENT_TEXT,
     getIcon,
     getIconPopup,
     secrets,
@@ -20,13 +21,45 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
 
     if (!serverObj) return error(404, `Unknown server key "/servers/${serverAcro}"`);
 
-    const dssRes = await fetch(
-        serverObj.url + Feeds.dedicatedServerStats(serverObj.code, DSSExtension.JSON),
-        { headers: { "User-Agent": `${USER_AGENT_PREFIX}DSS` } }
-    );
-    const dss: DSSResponse = await dssRes.json();
+    const dss = await (async () => {
+        const res = await fetch(
+            serverObj.url + Feeds.dedicatedServerStats(serverObj.code, DSSExtension.JSON),
+            {
+                signal: AbortSignal.timeout(5_000),
+                headers: { "User-Agent": USER_AGENT_TEXT }
+            }
+        ).catch(err => console.log("DSS Fetch error:", err.message));
 
-    if (!dss.slots) return error(500, "Insufficient DSS data");
+        if (!res || res.status !== constants.HTTP_STATUS_OK) return null;
+
+        const data: DSSResponse | void = await res.json().catch(err => console.log("DSS Parse error:", err.message));
+
+        if (!data?.slots) return null;
+
+        return data;
+    })();
+
+    const csg = await (async () => {
+        if (!dss) return null;
+
+        const res = await fetch(
+            serverObj.url + Feeds.dedicatedServerSavegame(serverObj.code, DSSFile.CareerSavegame),
+            {
+                signal: AbortSignal.timeout(5_000),
+                headers: { "User-Agent": USER_AGENT_TEXT }
+            }
+        ).catch(err => console.log("CSG Fetch error:", err.message));
+
+        if (!res || res.status !== constants.HTTP_STATUS_OK) return null;
+
+        const body = await res.text().catch(err => console.log("CSG Parse error:", err.message));
+
+        if (!body) return null;
+
+        return getSavegameData(xml2js(body, { compact: true }) as FSCSG);
+    })();
+
+    if (!dss || !csg) return error(500, `${serverObj.name} not responding`);
 
     const vehicles = dss.vehicles.map(vehicle => ({
         name: vehicle.name,
@@ -38,11 +71,6 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
         icon: getIcon(vehicle),
         popup: getIconPopup(vehicle)
     }));
-    const csgRes = await fetch(
-        serverObj.url + Feeds.dedicatedServerSavegame(serverObj.code, DSSFile.CareerSavegame),
-        { headers: { "User-Agent": `${USER_AGENT_PREFIX}CSG` } }
-    );
-    const csg = getSavegameData(xml2js(await csgRes.text(), { compact: true }) as FSCSG);
 
     return {
         dss: {

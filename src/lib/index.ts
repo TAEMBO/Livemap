@@ -2,7 +2,7 @@ import config from "../config.json";
 
 export * from "./utils";
 
-export const USER_AGENT_PREFIX = "Livemap/";
+export const USER_AGENT_TEXT = "Livemap";
 
 export const MAP_SIZE = 850;
 
