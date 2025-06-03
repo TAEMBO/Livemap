@@ -47,9 +47,9 @@
                 const marker = layer
                     .bindPopup(properties.popup)
                     .setIcon(icon({
-                        iconUrl: "/icons/" + properties.icon.icon,
-                        iconSize: [properties.icon.dimension, properties.icon.dimension],
-                        iconAnchor: [properties.icon.dimension / 2, properties.icon.dimension / 2],
+                        iconUrl: "/icons/" + properties.icon,
+                        iconSize: [12, 12],
+                        iconAnchor: [6, 6],
                         popupAnchor: [0, -10],
                     }));
 

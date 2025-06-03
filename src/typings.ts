@@ -91,10 +91,6 @@ export interface LeafletVehicle {
     type: string;
     category: string;
     controller?: string;
-    icon: {
-        icon: string;
-        desc: string;
-        dimension: number;
-    };
+    icon: string;
     popup: string;
 }
