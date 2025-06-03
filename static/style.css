@@ -24,6 +24,10 @@ body {
     --bs-list-group-border-color: rgba(255, 255, 255, 0.13);
 }
 
+.dark-mode-error > span {
+    --bs-list-group-color: #fff;
+}
+
 .dark-mode-list-group-anchor {
     color: #06860a;
 }
@@ -106,6 +110,28 @@ main > .container {
 .leaflet-container {
     aspect-ratio: 1 / 1;
     height: calc(95vh - 80px);
+}
+
+.error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.error > * {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.error > span {
+    font-size: x-large;
+    color: var(--bs-list-group-color);
+}
+
+.error > img {
+    filter: grayscale(100%);
+    transform: scaleY(-1);
+    aspect-ratio: 1 / 1;
 }
 
 button {

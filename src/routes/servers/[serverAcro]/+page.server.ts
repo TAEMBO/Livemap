@@ -19,13 +19,13 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
 
     console.log(`[${(new Date()).toLocaleString("en-GB")}] ${address} - ${serverAcro}`);
 
-    if (!serverObj) return error(404, `Unknown server key "/servers/${serverAcro}"`);
+    if (!serverObj) return error(404, `Unknown server "${serverAcro}"`);
 
     const dss = await (async () => {
         const res = await fetch(
             serverObj.url + Feeds.dedicatedServerStats(serverObj.code, DSSExtension.JSON),
             {
-                signal: AbortSignal.timeout(5_000),
+                signal: AbortSignal.timeout(3_000),
                 headers: { "User-Agent": USER_AGENT_TEXT }
             }
         ).catch(err => console.log("DSS Fetch error:", err.message));
@@ -45,7 +45,7 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
         const res = await fetch(
             serverObj.url + Feeds.dedicatedServerSavegame(serverObj.code, DSSFile.CareerSavegame),
             {
-                signal: AbortSignal.timeout(5_000),
+                signal: AbortSignal.timeout(3_000),
                 headers: { "User-Agent": USER_AGENT_TEXT }
             }
         ).catch(err => console.log("CSG Fetch error:", err.message));
