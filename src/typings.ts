@@ -1,5 +1,5 @@
 import type { PlayerUsed, Server, Slots } from "farming-simulator-types/2025";
-import type { getSavegameData } from "$lib";
+import type { getSavegameData } from "$lib/server";
 
 export interface RouteDataServersDynamicServerAcro {
     dss: {
@@ -11,6 +11,10 @@ export interface RouteDataServersDynamicServerAcro {
     isNewServer: boolean;
     vehicles: LeafletVehicle[];
     serverAcro: string;
+    serverHrefs: {
+        href: string;
+        name: string;
+    }[];
 }
 
 export type ListsHelperSettings = RouteDataServersDynamicServerAcro["csg"];

@@ -26,7 +26,7 @@
         <NewServerBanner />
     {/if}
     <ListColumn>
-        <CurrentServersList />
+        <CurrentServersList serverHrefs={data.serverHrefs} />
         <PlayerSlotsList data={data.dss} bind:popupPairs={popupPairs} />
     </ListColumn>
     {#key data.serverAcro}

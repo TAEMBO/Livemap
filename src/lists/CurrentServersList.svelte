@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { serverHrefs } from "$lib";
     import List from "../components/List.svelte";
     import ListItemBase from "../components/ListItemBase.svelte";
+    import type { RouteDataServersDynamicServerAcro } from "../typings";
+
+    export let serverHrefs: RouteDataServersDynamicServerAcro["serverHrefs"];
 </script>
 
 <List title="Current Servers">

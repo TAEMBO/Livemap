@@ -1,4 +1,4 @@
-import { secrets } from "$lib";
+import { secrets } from "$lib/server";
 import { Feeds } from "farming-simulator-types/2025";
 
 export async function GET(requestEvent) {

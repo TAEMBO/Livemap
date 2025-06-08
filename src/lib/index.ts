@@ -1,11 +1,19 @@
-import config from "../config.json";
-
-export * from "./utils";
-
-export const USER_AGENT_TEXT = "Livemap";
-
 export const MAP_SIZE = 850;
 
-export const secrets: Record<string, { name: string; url: string; code: string; }> = config;
+export function setTheme(theme: "light" | "dark") {
+    const cards = document.getElementsByClassName("card");
+    const listGroups = document.getElementsByClassName("list-group");
+    const listGroupAnchors = document.getElementsByClassName("list-group-anchor");
+    const error = document.getElementsByClassName("error")[0];
+    const action = theme === "light" ? "remove" : "add";
 
-export const serverHrefs = Object.entries(secrets).map(([key, { name }]) => ({ href: "/servers/" + key, name }));
+    document.body.classList[action]("dark-mode");
+
+    for (const card of cards) card.classList[action]("dark-mode-card");
+    for (const listGroup of listGroups) listGroup.classList[action]("dark-mode-list-group");
+    for (const listGroupAnchor of listGroupAnchors) listGroupAnchor.classList[action]("dark-mode-list-group-anchor");
+
+    error?.classList[action]("dark-mode-error");
+
+    localStorage.setItem("theme", theme);
+}

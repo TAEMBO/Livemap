@@ -1,5 +1,5 @@
 import { formatString } from "./formatString";
-import type { FSCSG } from "../../typings";
+import type { FSCSG } from "../../../typings";
 
 type SavegameKeys = NonNullable<FSCSG["careerSavegame"]>["settings"];
 

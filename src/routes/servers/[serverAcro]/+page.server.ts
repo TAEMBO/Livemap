@@ -4,11 +4,12 @@ import {
     USER_AGENT_TEXT,
     getIcon,
     getIconPopup,
-    secrets,
     formatTime,
     getSavegameData,
-    MAP_SIZE
-} from "$lib";
+    secrets,
+    serverHrefs,
+} from "$lib/server";
+import { MAP_SIZE } from "$lib";
 import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "farming-simulator-types/2025";
 import type { FSCSG, RouteDataServersDynamicServerAcro } from "../../../typings";
 import { xml2js } from "xml-js";
@@ -81,6 +82,7 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
         csg,
         isNewServer: csg.isNewServer,
         vehicles,
-        serverAcro
+        serverAcro,
+        serverHrefs
     } satisfies RouteDataServersDynamicServerAcro;
 }
