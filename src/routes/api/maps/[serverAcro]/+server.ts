@@ -1,8 +1,7 @@
-import { secrets } from "$lib/server";
 import { Feeds } from "farming-simulator-types/2025";
+import { secrets } from "$lib/server";
 
-export async function GET(requestEvent) {
-    const { params: { serverAcro } } = requestEvent;
+export async function GET({ params: { serverAcro } }) {
     const serverObj = secrets[serverAcro];
 
     if (!serverObj) return new Response(undefined, { status: 404 });

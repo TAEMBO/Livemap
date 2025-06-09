@@ -154,6 +154,16 @@ button {
         padding: 120px 15px 15px;
     }
 
+    .navbar.nav {
+        font-size: 15px;
+    }
+
+    .container {
+        max-width: 2048px;
+        padding-right: calc(var(--bs-gutter-x) * 0.5);
+        padding-left: calc(var(--bs-gutter-x) * 0.5);
+    }
+
     .navbar > .container > * {
         margin: auto
     }

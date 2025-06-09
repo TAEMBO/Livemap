@@ -1,6 +1,20 @@
 import type { PlayerUsed, Server, Slots } from "farming-simulator-types/2025";
 import type { getSavegameData } from "$lib/server";
 
+declare global {
+    namespace NodeJS {
+        interface ProcessEnv {
+            readonly DB_URI: string;
+            readonly REDIRECT_URI: string
+            readonly OAUTH_URI: string;
+            readonly GUILD_ID: string;
+            readonly REQUIRED_ROLES: string;
+            readonly CLIENT_ID: string;
+            readonly CLIENT_SECRET: string;
+        }
+    }
+};
+
 export interface RouteDataServersDynamicServerAcro {
     dss: {
         server: Server;
@@ -11,6 +25,7 @@ export interface RouteDataServersDynamicServerAcro {
     isNewServer: boolean;
     vehicles: LeafletVehicle[];
     serverAcro: string;
+    loginText: string;
     serverHrefs: {
         href: string;
         name: string;

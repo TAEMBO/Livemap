@@ -3,6 +3,7 @@
     import { setTheme } from "$lib";
 
     export let name: string;
+    export let loginText: string;
 
     function toggleTheme() {
         setTheme(localStorage.getItem("theme") === "dark" ? "light" : "dark");
@@ -28,6 +29,9 @@
                     <a class="button" type="button" role="button" tabindex={0} on:click={toggleTheme}>
                         Toggle theme
                     </a>
+                </li>
+                <li class="nav-item">
+                    <a class="button" href="/login"> {loginText} </a>
                 </li>
             </ul>
         </div>

@@ -1,26 +1,38 @@
-import { error } from "@sveltejs/kit";
+import { arrayContains } from "drizzle-orm";
 import { constants } from "http2";
+import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "farming-simulator-types/2025";
+import { error } from "@sveltejs/kit";
+import { xml2js } from "xml-js";
 import {
     USER_AGENT_TEXT,
+    authorized_clients,
+    db,
     getIcon,
     getIconPopup,
     formatTime,
     getSavegameData,
+    log,
     secrets,
     serverHrefs,
 } from "$lib/server";
 import { MAP_SIZE } from "$lib";
-import { DSSExtension, DSSFile, Feeds, filterUnused, type DSSResponse } from "farming-simulator-types/2025";
 import type { FSCSG, RouteDataServersDynamicServerAcro } from "../../../typings";
-import { xml2js } from "xml-js";
 
-export async function load({ fetch, params: { serverAcro }, request: { headers }, getClientAddress }) {
+export async function load({ fetch, params: { serverAcro }, request: { headers }, getClientAddress, cookies }) {
+    const authToken = cookies.get("authToken");
     const serverObj = secrets[serverAcro];
     const address = headers.get("x-forwarded-for") ?? getClientAddress();
 
-    console.log(`[${(new Date()).toLocaleString("en-GB")}] ${address} - ${serverAcro}`);
+    log(`${address} - ${serverAcro}`);
 
     if (!serverObj) return error(404, `Unknown server "${serverAcro}"`);
+
+    if (!authToken) return error(403, "Not logged in");
+
+    const data = await db.select().from(authorized_clients).where(arrayContains(authorized_clients.clientTokens, [authToken]));
+    const foundUser = data[0] as typeof authorized_clients.$inferSelect | undefined;
+    
+    if (!foundUser) return error(403, "Access denied");
 
     const dss = await (async () => {
         const res = await fetch(
@@ -29,11 +41,11 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
                 signal: AbortSignal.timeout(3_000),
                 headers: { "User-Agent": USER_AGENT_TEXT }
             }
-        ).catch(err => console.log("DSS Fetch error:", err.message));
+        ).catch(err => log("DSS Fetch error:", err.message));
 
         if (!res || res.status !== constants.HTTP_STATUS_OK) return null;
 
-        const data: DSSResponse | void = await res.json().catch(err => console.log("DSS Parse error:", err.message));
+        const data: DSSResponse | void = await res.json().catch(err => log("DSS Parse error:", err.message));
 
         if (!data?.slots) return null;
 
@@ -49,11 +61,11 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
                 signal: AbortSignal.timeout(3_000),
                 headers: { "User-Agent": USER_AGENT_TEXT }
             }
-        ).catch(err => console.log("CSG Fetch error:", err.message));
+        ).catch(err => log("CSG Fetch error:", err.message));
 
         if (!res || res.status !== constants.HTTP_STATUS_OK) return null;
 
-        const body = await res.text().catch(err => console.log("CSG Parse error:", err.message));
+        const body = await res.text().catch(err => log("CSG Parse error:", err.message));
 
         if (!body) return null;
 
@@ -83,6 +95,7 @@ export async function load({ fetch, params: { serverAcro }, request: { headers }
         isNewServer: csg.isNewServer,
         vehicles,
         serverAcro,
-        serverHrefs
+        serverHrefs,
+        loginText: "👤 " + foundUser.discordDisplayName
     } satisfies RouteDataServersDynamicServerAcro;
 }

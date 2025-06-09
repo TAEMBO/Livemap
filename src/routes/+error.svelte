@@ -8,7 +8,7 @@
     <title>{page.status.toString()} | IRT Livemap</title>
 </svelte:head>
 
-<Header name="Error" />
+<Header name="Error" loginText={page.error?.message === "Not logged in" ? "Login" : ""}/>
 <Main>
     <div class="error">
         <img class="d-inline-block align-center flipped" src="/favicon.png" height="256" alt="Main icon" />

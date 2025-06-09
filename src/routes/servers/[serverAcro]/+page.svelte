@@ -20,7 +20,7 @@
     <title>{data.dss.server.name || "Server Offline"} | IRT Livemap</title>
 </svelte:head>
 
-<Header name={data.dss.server.name || "Server Offline"} />
+<Header name={data.dss.server.name || "Server Offline"} loginText={data.loginText} />
 <Main>
     {#if data.csg.isNewServer}
         <NewServerBanner />
