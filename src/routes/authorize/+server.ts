@@ -80,10 +80,16 @@ export async function GET({ url: { searchParams }, cookies, request: { headers }
 
     log(address, "- Authorized as", member.user.id);
 
+    const curDate = new Date();
+    const expDate = new Date(curDate);
+    
+    expDate.setDate(curDate.getDate() + 90);
+
     cookies.set("authToken", token, {
         httpOnly: true,
         sameSite: true,
-        path: "/"
+        path: "/",
+        expires: expDate
     });
 
     throw redirect(303, "/?auth=true");
