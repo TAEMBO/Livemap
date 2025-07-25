@@ -17,10 +17,10 @@
 </script>
 
 <svelte:head>
-    <title>{data.dss.server.name || "Server Offline"} | IRT Livemap</title>
+    <title>{data.dss.server.name.replace(/&#(\d+);/, "") || "Server Offline"} | IRT Livemap</title>
 </svelte:head>
 
-<Header name={data.dss.server.name || "Server Offline"} loginText={data.loginText} />
+<Header name={data.dss.server.name.replace(/&#(\d+);/, "") || "Server Offline"} loginText={data.loginText} />
 <Main>
     {#if data.csg.isNewServer}
         <NewServerBanner />
