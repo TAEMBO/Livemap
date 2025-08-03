@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { invalidateAll } from "$app/navigation";
+    import { onMount } from "svelte";
     import Header from "../../../components/Header.svelte";
     import LeafletMap from "../../../components/LeafletMap.svelte";
     import ListColumn from "../../../components/ListColumn.svelte";
@@ -12,6 +14,8 @@
     import type { Marker } from "leaflet";
 
     export let data: RouteDataServersDynamicServerAcro;
+
+    onMount(() => setInterval(() => invalidateAll(), 30_000));
     
     let popupPairs = new Map<string, Marker>();
 </script>
@@ -29,7 +33,7 @@
         <CurrentServersList serverHrefs={data.serverHrefs} />
         <PlayerSlotsList data={data.dss} bind:popupPairs={popupPairs} />
     </ListColumn>
-    {#key data.serverAcro}
+    {#key data}
         <LeafletMap serverAcro={data.serverAcro} vehicles={data.vehicles} bind:popupPairs={popupPairs} />
     {/key}
     <ListColumn>
