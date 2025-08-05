@@ -6,7 +6,7 @@ export function getIcon(object: Vehicle) {
 
     icon ??= icons[object.type.toLowerCase()];
 
-    if (object.controller) icon = icons.controller;
+    if ("controller" in object) icon = object.controller?.length ? icons.controller : icons.controllerghost;
 
     icon ??= icons.default;
 

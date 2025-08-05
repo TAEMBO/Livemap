@@ -54,5 +54,6 @@ export const icons: Record<string, string> = {
     ranetrailer: "trailer.png",
     tumpcutter: "tool.png",
     misc: "ropa.png",
-    controller: "controller.png"
+    controller: "controller.png",
+    controllerghost: "controllerghost.png"
 };

@@ -18,7 +18,7 @@ export function getIconPopup(vehicle: Vehicle) {
         }
     }
 
-    if ("controller" in vehicle) popupHTML += `<br>Player: ${vehicle.controller}`;
+    if ("controller" in vehicle) popupHTML += vehicle.controller?.length ? `<br>Player: ${vehicle.controller}` : "<br>Vehicle unusable";
 
     popupHTML += "</small>";
 
