@@ -12,11 +12,21 @@ export default [
     },
     {
         ignores: [
+            ".DS_Store",
+            "node_modules",
+            ".env",
+            ".env.*",
+            "!.env.example",
+            "*.js",
+            "!.config.js",
             "build",
             "*.config.{js,ts,cjs,mjs,cts,mts}",
             ".svelte-kit",
             ".vercel",
-            "static"
+            "static",
+            "pnpm-lock.yaml",
+            "package-lock.json",
+            "yarn.lock"
         ]
     },
     {
