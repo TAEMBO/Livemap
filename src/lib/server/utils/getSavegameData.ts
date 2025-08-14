@@ -1,21 +1,25 @@
 import { formatString } from "./formatString";
 import type { FSCSG } from "../../../typings";
 
-type SavegameKeys = NonNullable<FSCSG["careerSavegame"]>["settings"];
+type SettingsKeys = NonNullable<NonNullable<FSCSG["careerSavegame"]>["settings"]>;
 
 export function getSavegameData(game: FSCSG) {
-    const setting = <TKey extends keyof SavegameKeys, >(key: TKey) => {
-        return game.careerSavegame?.settings[key]?._text as NonNullable<SavegameKeys[TKey]>["_text"] | undefined;
-    };
+    function getSetting<TKey extends keyof SettingsKeys, TPlaceholder extends string>(key: TKey, placeholder: TPlaceholder) {
+        const settings = game.careerSavegame?.settings;
+
+        if (!settings) return placeholder;
+
+        return settings[key] ? settings[key]._text as NonNullable<SettingsKeys[TKey]>["_text"] : placeholder;
+    }
     const formatNumber = (number: number, icon = "") => number.toLocaleString(undefined, { minimumFractionDigits: 0 }) + icon;
 
     return {
-        isNewServer: !game.careerSavegame,
-        money: formatNumber(+(game.careerSavegame?.statistics.money._text ?? 0), " $"),
-        mapTitle: setting("mapTitle") ?? "Unknown",
-        timeScale: formatNumber(+(setting("timeScale") ?? 0), "x"),
-        saveInterval: formatNumber(+(setting("autoSaveInterval") ?? 0), " min"),
-        economicDifficulty: formatString(setting("economicDifficulty") ?? "Unknown"),
+        isNewServer: !game.careerSavegame?.settings,
+        money: formatNumber(parseInt((game.careerSavegame?.statistics.money._text ?? "0")), " $"),
+        mapTitle: getSetting("mapTitle", "Unknown"),
+        timeScale: formatNumber(parseFloat(getSetting("timeScale", "0")), "x"),
+        saveInterval: formatNumber(parseInt(getSetting("autoSaveInterval", "0")), " min"),
+        economicDifficulty: formatString(getSetting("economicDifficulty", "Unknown")),
         fixedSeasonalVisuals: ({
             "1": "March",
             "2": "April",
@@ -30,68 +34,68 @@ export function getSavegameData(game: FSCSG) {
             "11": "January",
             "12": "February",
             "0": "Off"
-        })[setting("fixedSeasonalVisuals") ?? "0"] ?? "Off",
+        })[getSetting("fixedSeasonalVisuals", "0")] ?? "Off",
         growthMode: ({
             "1": "Yes",
             "2": "No",
             "3": "Paused",
             "0": "Unknown"
-        })[setting("growthMode") ?? "0"],
+        })[getSetting("growthMode", "0")],
         fuelUsage: ({
             "1": "Low",
             "2": "Normal",
             "3": "High",
             "0": "Unknown"
-        })[setting("fuelUsage") ?? "0"],
+        })[getSetting("fuelUsage", "0")],
         dirtInterval: ({
             "1": "Off",
             "2": "Slow",
             "3": "Normal",
             "4": "Fast",
             "0": "Unknown"
-        })[setting("dirtInterval") ?? "0"],
-        savegameName: setting("savegameName") ?? "Unknown",
+        })[getSetting("dirtInterval", "0")],
+        savegameName: getSetting("savegameName", "Unknown"),
         helperBuyFuel: ({
             "true": "Buy",
             "false": "Off",
             "0": "Unknown"
-        })[setting("helperBuyFuel") ?? "0"],
+        })[getSetting("helperBuyFuel", "0")],
         helperBuySeeds: ({
             "true": "Buy",
             "false": "Off",
             "0": "Unknown"
-        })[setting("helperBuySeeds") ?? "0"],
+        })[getSetting("helperBuySeeds", "0")],
         helperBuyFertilizer: ({
             "true": "Buy",
             "false": "Off",
             "0": "Unknown"
-        })[setting("helperBuyFertilizer") ?? "0"],
+        })[getSetting("helperBuyFertilizer", "0")],
         helperSlurrySource: ({
             "1": "Off",
             "2": "Buy",
             "0": "Unknown"
-        })[setting("helperSlurrySource") ?? "0"],
+        })[getSetting("helperSlurrySource", "0")],
         helperManureSource: ({
             "1": "Off",
             "2": "Buy",
             "0": "Unknown"
-        })[setting("helperSlurrySource") ?? "0"],
-        slotUsage: (+(game.careerSavegame?.slotSystem._attributes.slotUsage ?? 0)).toLocaleString("en-US"),
-        creationDate: (setting("creationDate") ?? "0000-00-00").split("-").reverse().join("/"),
+        })[getSetting("helperSlurrySource", "0")],
+        slotUsage: (parseInt(game.careerSavegame?.slotSystem?._attributes.slotUsage ?? "0")).toLocaleString("en-US"),
+        creationDate: getSetting("creationDate", "0000-00-00").split("-").reverse().join("/"),
         fruitDestruction: ({
             "true": "On",
             "false": "Off",
             "0": "Unknown"
-        })[setting("fruitDestruction") ?? "0"],
+        })[getSetting("fruitDestruction", "0")],
         plowingRequiredEnabled: ({
             "true": "On",
             "false": "Off",
             "0": "Unknown"
-        })[setting("plowingRequiredEnabled") ?? "0"],
+        })[getSetting("plowingRequiredEnabled", "0")],
         automaticMotorStartEnabled: ({
             "true": "On",
             "false": "Off",
             "0": "Unknown"
-        })[setting("automaticMotorStartEnabled") ?? "0"],
+        })[getSetting("automaticMotorStartEnabled", "0")],
     };
 }

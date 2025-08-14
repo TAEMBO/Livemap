@@ -26,10 +26,10 @@
 
 <Header name={data.dss.server.name.replace(/&#(\d+);/, "") || "Server Offline"} loginText={data.loginText} />
 <Main>
-    {#if data.csg.isNewServer}
-        <NewServerBanner />
-    {/if}
     <ListColumn>
+        {#if data.csg.isNewServer}
+            <NewServerBanner />
+        {/if}
         <CurrentServersList serverHrefs={data.serverHrefs} />
         <PlayerSlotsList data={data.dss} bind:popupPairs={popupPairs} />
     </ListColumn>
