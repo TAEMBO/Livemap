@@ -13,7 +13,7 @@
     <ListItem name="Creation Date" value={data.csg.creationDate} />
     <ListItem name="Map Name" value={data.csg.mapTitle} />
     <ListItem name="Map Size" value={data.dss.server.mapSize.toString()} />
-    <ListItem name="Game Version" value={data.dss.server.version} />
+    <ListItem name="Game Version" value={data.dss.server.version || "Unknown"} />
     <ListItem name="Timescale" value={data.csg.timeScale} />
     <ListItem name="Autosave Interval" value={data.csg.saveInterval} />
     <ListItem name="Economy Difficulty" value={data.csg.economicDifficulty} />
