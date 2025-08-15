@@ -1,4 +1,4 @@
-import { OAuth2API, UsersAPI } from "@discordjs/core";
+import { OAuth2API, UsersAPI } from "@discordjs/core/http-only";
 import { type DiscordAPIError, REST } from "@discordjs/rest";
 import { eq } from "drizzle-orm";
 import { error, redirect } from "@sveltejs/kit";
