@@ -15,7 +15,9 @@
 
     export let data: RouteDataServersDynamicServerAcro;
 
-    onMount(() => setInterval(() => invalidateAll(), 30_000));
+    onMount(() => setInterval(async () => {
+        if (document.hasFocus()) await invalidateAll();
+    }, 30_000));
     
     let popupPairs = new Map<string, Marker>();
 </script>
