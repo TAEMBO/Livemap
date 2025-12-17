@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { formatGameTime } from "$lib";
     import List from "../components/List.svelte";
     import ListItem from "../components/ListItem.svelte";
     import type { ListsServerDetails } from "../typings";
@@ -12,8 +13,9 @@
     <ListItem name="Savegame Name" value={data.csg.savegameName} />
     <ListItem name="Creation Date" value={data.csg.creationDate} />
     <ListItem name="Map Name" value={data.csg.mapTitle} />
-    <ListItem name="Map Size" value={data.dss.server.mapSize.toString()} />
+    <ListItem name="Map Size" value={(data.dss.server.mapSize / 1024).toString() + "X"} />
     <ListItem name="Game Version" value={data.dss.server.version || "Unknown"} />
+    <ListItem name="In-game Time" value={formatGameTime(data.dss.server.dayTime)} />
     <ListItem name="Timescale" value={data.csg.timeScale} />
     <ListItem name="Autosave Interval" value={data.csg.saveInterval} />
     <ListItem name="Economy Difficulty" value={data.csg.economicDifficulty} />
